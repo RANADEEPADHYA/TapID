@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../widgets/animated_arrow.dart';
@@ -8,23 +7,20 @@ import '../../../widgets/loading_spinner.dart';
 class LoadingStatusButton extends StatefulWidget {
   const LoadingStatusButton({
     super.key,
-    this.duration = const Duration(seconds: 10),
+    this.duration = const Duration(seconds: 5),
     this.loadingText = 'Loading...',
     this.finishedText = 'Next',
     this.onFinished,
   });
 
+  /// How long the button stays in loading state.
   final Duration duration;
   final String loadingText;
   final String finishedText;
-
-  /// Called when the user clicks the button
-  /// after loading has finished.
   final VoidCallback? onFinished;
 
   @override
-  State<LoadingStatusButton> createState() =>
-      _LoadingStatusButtonState();
+  State<LoadingStatusButton> createState() => _LoadingStatusButtonState();
 }
 
 class _LoadingStatusButtonState extends State<LoadingStatusButton>
@@ -34,25 +30,24 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
   bool _isLoading = true;
 
   @override
+  @override
   void initState() {
     super.initState();
 
     /// ─────────────────────────────────────────
     /// Spinner animation
-
     _spinnerController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
     )..repeat();
 
     /// ─────────────────────────────────────────
-    /// 10 second loading timer
+    /// Loading duration
     _timer = Timer(widget.duration, () {
       if (!mounted) return;
       setState(() {
         _isLoading = false;
       });
-      // Stop spinner
       _spinnerController.stop();
     });
   }

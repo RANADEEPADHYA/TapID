@@ -40,17 +40,8 @@ class WelcomeText extends StatelessWidget {
 
               SizedBox(
                 width: (width * 0.08)
-                    .clamp(10.0, 20.0)
+                    .clamp(8.0, 10.0)
                     .toDouble(),
-              ),
-
-              /// ─────────────────────────────────────────
-              /// Image + App Name
-              Image.asset(
-                'assets/images/TabID_round.png',
-                width: 32,
-                height: 32,
-                fit: BoxFit.contain,
               ),
 
               /// ─────────────────────────────────────────

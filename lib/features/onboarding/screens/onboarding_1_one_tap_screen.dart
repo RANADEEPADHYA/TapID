@@ -158,8 +158,8 @@ class _WelcomeHeader extends StatelessWidget {
           children: [
             Image.asset(
               'assets/images/TabID_round.png',
-              width: 45,
-              height: 45,
+              width: 60,
+              height: 60,
               fit: BoxFit.contain,
             ),
 
