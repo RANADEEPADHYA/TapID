@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tab_id/main.dart';
 import '../controllers/onboarding_controller.dart';
 import '../widgets/onboarding_bottom_navigation.dart';
 import '../widgets/onboarding_page_indicator.dart';
+import '../widgets/onboarding_skip_button.dart';
 import 'onboarding_1_one_tap_screen.dart';
 import 'onboarding_2_nfc_screen.dart';
 import 'onboarding_3_privacy_screen.dart';
@@ -26,6 +28,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     controller = OnboardingController();
     controller.addListener(_onControllerChanged);
   }
+
   void _onControllerChanged() {
     if (mounted) {
       setState(() {});
@@ -44,7 +47,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void _goToHome() {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (_) => const MyHomePage(title: 'home'),
+        builder: (_) => const MyHomePage(
+          title: 'home',
+        ),
       ),
           (route) => false,
     );
@@ -69,6 +74,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+    final bool isLastPage = controller.isLastPage;
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -90,12 +96,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
 
             /// ═══════════════════════════════════════════════════
+            /// SKIP — TOP RIGHT
+            if (!isLastPage)Positioned(
+                top: 20,
+                right: 20,
+                child: OnboardingSkipButton(
+                  onTap: _handleSkip,
+                ),
+            ),
+
+            /// ═══════════════════════════════════════════════════
             /// PAGE INDICATOR
+
             Positioned(
               left: 0,
               right: 0,
-              /// Responsive bottom position
-              bottom: 130.0,
+              bottom: 130,
               child: OnboardingPageIndicator(
                 currentPage: controller.currentPage,
                 pageCount: OnboardingController.totalPages,
@@ -107,15 +123,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Positioned(
               left: 20,
               right: 20,
-              bottom: 10.0,
+              bottom: 10,
               child: OnboardingBottomNavigation(
-                availableWidth: size.width,
                 currentPage: controller.currentPage,
                 totalPages: OnboardingController.totalPages,
-                /// Next / Get Started
                 onNext: _handleNext,
-                /// Skip → Home
-                onSkip: _handleSkip,
               ),
             ),
           ],
