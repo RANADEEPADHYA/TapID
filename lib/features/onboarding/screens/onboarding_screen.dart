@@ -10,6 +10,7 @@ import 'onboarding_2_nfc_screen.dart';
 import 'onboarding_3_privacy_screen.dart';
 import 'onboarding_4_share_screen.dart';
 import 'onboarding_5_get_started_screen.dart';
+import '../../../widgets/background_onboarding.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({
@@ -76,61 +77,63 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final size = MediaQuery.sizeOf(context);
     final bool isLastPage = controller.isLastPage;
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
+      body: BackgroundOnboarding(
+        child:SafeArea(
+          child: Stack(
+            children: [
 
-            /// ═══════════════════════════════════════════════════
-            /// ONBOARDING PAGES
-            PageView(
-              controller: controller.pageController,
-              onPageChanged: controller.onPageChanged,
-              physics: const BouncingScrollPhysics(),
-              children: const [
-                Onboarding1OneTapScreen(),
-                Onboarding2NfcScreen(),
-                Onboarding3PrivacyScreen(),
-                Onboarding4ShareScreen(),
-                Onboarding5GetStartedScreen(),
-              ],
-            ),
+              /// ═══════════════════════════════════════════════════
+              /// ONBOARDING PAGES
+              PageView(
+                controller: controller.pageController,
+                onPageChanged: controller.onPageChanged,
+                physics: const BouncingScrollPhysics(),
+                children: const [
+                  Onboarding1OneTapScreen(),
+                  Onboarding2NfcScreen(),
+                  Onboarding3PrivacyScreen(),
+                  Onboarding4ShareScreen(),
+                  Onboarding5GetStartedScreen(),
+                ],
+              ),
 
-            /// ═══════════════════════════════════════════════════
-            /// SKIP — TOP RIGHT
-            if (!isLastPage)Positioned(
-                top: 20,
-                right: 20,
-                child: OnboardingSkipButton(
-                  onTap: _handleSkip,
+              /// ═══════════════════════════════════════════════════
+              /// SKIP — TOP RIGHT
+              if (!isLastPage)Positioned(
+                  top: 20,
+                  right: 20,
+                  child: OnboardingSkipButton(
+                    onTap: _handleSkip,
+                  ),
+              ),
+
+              /// ═══════════════════════════════════════════════════
+              /// PAGE INDICATOR
+
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 130,
+                child: OnboardingPageIndicator(
+                  currentPage: controller.currentPage,
+                  pageCount: OnboardingController.totalPages,
                 ),
-            ),
-
-            /// ═══════════════════════════════════════════════════
-            /// PAGE INDICATOR
-
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 130,
-              child: OnboardingPageIndicator(
-                currentPage: controller.currentPage,
-                pageCount: OnboardingController.totalPages,
               ),
-            ),
 
-            /// ═══════════════════════════════════════════════════
-            /// BOTTOM NAVIGATION
-            Positioned(
-              left: 20,
-              right: 20,
-              bottom: 10,
-              child: OnboardingBottomNavigation(
-                currentPage: controller.currentPage,
-                totalPages: OnboardingController.totalPages,
-                onNext: _handleNext,
+              /// ═══════════════════════════════════════════════════
+              /// BOTTOM NAVIGATION
+              Positioned(
+                left: 20,
+                right: 20,
+                bottom: 10,
+                child: OnboardingBottomNavigation(
+                  currentPage: controller.currentPage,
+                  totalPages: OnboardingController.totalPages,
+                  onNext: _handleNext,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
