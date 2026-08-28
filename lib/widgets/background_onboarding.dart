@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../theme/app_colors.dart';
+
 class BackgroundOnboarding extends StatelessWidget {
   const BackgroundOnboarding({
     super.key,
@@ -13,14 +15,21 @@ class BackgroundOnboarding extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Color(0xFFFF43D9),
-            Color(0xFF875DFF),
-            Color(0xFF438CFF),
+            AppColors.white,
+            AppColors.white,
+            AppColors.white,
+            AppColors.purple50,
+          ],
+          stops: [
+            0.0,
+            0.4,
+            0.6,
+            1,
           ],
         ),
       ),

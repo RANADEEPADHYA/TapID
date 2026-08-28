@@ -7,7 +7,7 @@ import '../../../widgets/loading_spinner.dart';
 class LoadingStatusButton extends StatefulWidget {
   const LoadingStatusButton({
     super.key,
-    this.duration = const Duration(seconds: 5),
+    this.duration = const Duration(seconds: 4),
     this.loadingText = 'Loading...',
     this.finishedText = 'Next',
     this.onFinished,

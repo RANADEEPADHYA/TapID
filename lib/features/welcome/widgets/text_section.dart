@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tab_id/theme/app_colors.dart';
 
 import '../../../widgets/app_name.dart';
 
@@ -19,41 +20,37 @@ class WelcomeText extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
 
-        Center(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
 
-              /// ─────────────────────────────────────────────
-              /// Welcome Title
-              Text(
-                'Welcome to',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.roboto(
-                  color: Colors.white,
-                  fontSize: 32,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-
-              SizedBox(
-                width: (width * 0.08)
-                    .clamp(8.0, 10.0)
-                    .toDouble(),
-              ),
-
-              /// ─────────────────────────────────────────
-              /// App Name (TapID)
-              const AppName(
-                fontSize: 32,
-                fontWeight: FontWeight.w900,
-                splitColor: true,
-              ),
-            ],
-          ),
+        /// ─────────────────────────────────────────────
+        /// APP LOGO
+        Image.asset(
+          'assets/images/TabID_round.png',
+          width: (width * 0.50),
+          height: (width * 0.50),
+          fit: BoxFit.contain,
         ),
+
+        SizedBox(
+          height: (height * 0.01)
+              .clamp(20.0, 40.0)
+              .toDouble(),
+        ),
+
+
+        /// ─────────────────────────────────────────
+        /// App Name (TapID)
+        const AppName(
+          fontSize: 48,
+          fontWeight: FontWeight.w900,
+          splitColor: true,
+        ),
+
+        SizedBox(
+          height: (height * 0.01)
+              .clamp(10.0, 30.0)
+              .toDouble(),
+        ),
+
 
         /// ─────────────────────────────────────────────
         /// Subtitle
@@ -61,7 +58,7 @@ class WelcomeText extends StatelessWidget {
           'Tap. Share. Connect.',
           textAlign: TextAlign.center,
           style: GoogleFonts.roboto(
-            color: const Color(0xFF9C9494),
+            color: AppColors.textSecondary,
             fontSize: 22,
             fontWeight: FontWeight.w500,
           ),
@@ -85,9 +82,9 @@ class WelcomeText extends StatelessWidget {
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               colors: [
-                Color(0xFFFF43D9),
-                Color(0xFF875DFF),
-                Color(0xFF438CFF),
+              AppColors.brandPink,
+              AppColors.primaryPurple,
+              AppColors.primaryBlue,
               ],
             ),
             borderRadius: BorderRadius.circular(10),

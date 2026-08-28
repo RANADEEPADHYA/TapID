@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tab_id/features/onboarding/widgets/onboarding_main_illustration.dart';
+import 'package:tab_id/theme/app_colors.dart';
 import 'package:tab_id/widgets/app_name.dart';
 
 class Onboarding1OneTapScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class Onboarding1OneTapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.transparent,
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -67,7 +68,7 @@ class Onboarding1OneTapScreen extends StatelessWidget {
                               style: GoogleFonts.roboto(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
-                                color: const Color(0xFF626875),
+                                color: AppColors.textSecondary,
                               ),
                             ),
 
@@ -95,7 +96,7 @@ class Onboarding1OneTapScreen extends StatelessWidget {
                                 style: GoogleFonts.roboto(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w800,
-                                  color: Colors.black,
+                                  color: AppColors.textPrimary,
                                 ),
                               ),
                             ),
@@ -109,7 +110,7 @@ class Onboarding1OneTapScreen extends StatelessWidget {
                                 style: GoogleFonts.roboto(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF626875),
+                                  color: AppColors.textSecondary,
                                 ),
                               ),
                             ),
@@ -147,7 +148,7 @@ class _WelcomeHeader extends StatelessWidget {
           style: GoogleFonts.roboto(
             fontSize: 28,
             fontWeight: FontWeight.w700,
-            color: Colors.black,
+            color: AppColors.textPrimary,
           ),
         ),
 
@@ -165,7 +166,7 @@ class _WelcomeHeader extends StatelessWidget {
 
             const AppName(
               splitColor: true,
-              tapColor: Colors.black,
+              tapColor: AppColors.textPrimary,
               fontSize: 45,
               fontWeight: FontWeight.w900,
             ),

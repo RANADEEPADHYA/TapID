@@ -125,7 +125,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               Positioned(
                 left: 20,
                 right: 20,
-                bottom: 10,
+                bottom: 20,
                 child: OnboardingBottomNavigation(
                   currentPage: controller.currentPage,
                   totalPages: OnboardingController.totalPages,
