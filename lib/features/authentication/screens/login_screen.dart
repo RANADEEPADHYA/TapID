@@ -4,6 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../theme/app_colors.dart';
 import '../../../widgets/animated_arrow.dart';
 import '../../../widgets/app_name.dart';
+import '../widgets/auth_google_button.dart';
+import '../widgets/email_input_field.dart';
+import '../widgets/password_input_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({
@@ -66,13 +69,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   final width = constraints.maxWidth;
                   final height = constraints.maxHeight;
 
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 16,
-                    ),
-                    child: Center(
-                      child: Column(
+                  return SingleChildScrollView(
+                      keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
+
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 16,
+                        ),
+                        child: Center(
+                          child: Column(
                           children: [
 
                             SizedBox(
@@ -119,73 +126,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                   const SizedBox(height: 24),
 
-                                  _InputField(
+                                  EmailInputField(
                                     controller: _emailController,
-                                    hintText: 'Enter your email',
-                                    keyboardType: TextInputType.emailAddress,
-                                    textInputAction: TextInputAction.next,
-                                    prefixIcon: Icons.mail_outline_rounded,
-                                    validator: (value) {
-                                      if (value == null ||
-                                          value.trim().isEmpty) {
-                                        return 'Please enter your email';
-                                      }
-
-                                      final emailRegex = RegExp(
-                                        r'^[^@\s]+@[^@\s]+\.[^@\s]+$',
-                                      );
-
-                                      if (!emailRegex.hasMatch(
-                                        value.trim(),
-                                      )) {
-                                        return 'Please enter a valid email';
-                                      }
-
-                                      return null;
-                                    },
                                   ),
 
                                   const SizedBox(height: 14),
 
-                                  _InputField(
+                                  PasswordInputField(
                                     controller: _passwordController,
-                                    hintText: 'Enter your password',
-                                    prefixIcon: Icons.lock_outline_rounded,
-                                    obscureText: _obscurePassword,
-                                    textInputAction: TextInputAction.done,
                                     onSubmitted: (_) => _login(),
-                                    suffixIcon: IconButton(
-                                      tooltip: _obscurePassword
-                                          ? 'Show password'
-                                          : 'Hide password',
-                                      onPressed: () {
-                                        setState(() {
-                                          _obscurePassword =
-                                          !_obscurePassword;
-                                        });
-                                      },
-                                      icon: Icon(
-                                        _obscurePassword
-                                            ? Icons.visibility_outlined
-                                            : Icons.visibility_off_outlined,
-                                        size: 23,
-                                      ),
-                                    ),
-                                    validator: (value) {
-                                      if (value == null ||
-                                          value.isEmpty) {
-                                        return 'Please enter your password';
-                                      }
-
-                                      if (value.length < 6) {
-                                        return 'Password must be at least 6 characters';
-                                      }
-
-                                      return null;
-                                    },
                                   ),
 
-                                  const SizedBox(height: 8),
 
                                   Align(
                                     alignment: Alignment.centerRight,
@@ -302,15 +253,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                     height: (height * 0.01).clamp(20.0, 40.0).toDouble(),
                                   ),
 
-                                  _GoogleButton(
+                                  AuthGoogleButton(
                                     onPressed: _continueWithGoogle,
                                   ),
 
                                 ],
                               ),
                             ),
-
-                            const Spacer(),
+                            SizedBox(
+                              height: (height * 0.01).clamp(20.0, 40.0).toDouble(),
+                            ),
 
                             /// ─────────────────────────────────────────
                             /// LOGO
@@ -333,8 +285,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
 
-                            const SizedBox(height: 12),
-
                             /// ─────────────────────────────────────────
                             /// FOOTER
                             Text(
@@ -345,13 +295,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: AppColors.textSecondary,
                               ),
                             ),
-
-                            SizedBox(
-                              height: (height * 0.01).clamp(20.0, 40.0).toDouble(),
-                            ),
                           ],
+                          )
+                        )
                       ),
-                    ),
                   );
                 },
               ),
@@ -363,196 +310,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-
-
-// ═══════════════════════════════════════════════════════════════
-// GOOGLE BUTTON
-// ═══════════════════════════════════════════════════════════════
-
-class _GoogleButton extends StatelessWidget {
-  const _GoogleButton({
-    required this.onPressed,
-  });
-
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(20),
-      elevation: 0,
-      shadowColor: Colors.black.withValues(alpha: .08),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(20),
-        onTap: onPressed,
-        child: Container(
-          height: 68,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: AppColors.primaryPurple,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: .15),
-                blurRadius: 18,
-                offset: const Offset(0, 7),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-
-              /// Use the official Google icon asset in production.
-              Container(
-              width: 42,
-              height: 42,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColors.white,
-              ),
-              child: Center(
-                child:  Image.asset(
-                  'assets/images/icon/ic_google.png',
-                  width: 22,
-                  height: 22,
-                  fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-
-              const SizedBox(width: 15),
-
-              Expanded(
-                child: Text(
-                  'Continue with Google',
-                  style: GoogleFonts.roboto(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.white,
-                  ),
-                ),
-              ),
-
-              const AnimatedArrow(
-                size: 32,
-                color: Colors.white,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════
-// INPUT FIELD
-// ═══════════════════════════════════════════════════════════════
-
-class _InputField extends StatelessWidget {
-  const _InputField({
-    required this.controller,
-    required this.hintText,
-    required this.prefixIcon,
-    required this.validator,
-    this.keyboardType,
-    this.textInputAction,
-    this.obscureText = false,
-    this.suffixIcon,
-    this.onSubmitted,
-  });
-
-  final TextEditingController controller;
-  final String hintText;
-  final IconData prefixIcon;
-  final String? Function(String?) validator;
-  final TextInputType? keyboardType;
-  final TextInputAction? textInputAction;
-  final bool obscureText;
-  final Widget? suffixIcon;
-  final ValueChanged<String>? onSubmitted;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      keyboardType: keyboardType,
-      textInputAction: textInputAction,
-      obscureText: obscureText,
-      validator: validator,
-      onFieldSubmitted: onSubmitted,
-      style: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-        color: Color(0xFF18284A),
-      ),
-      cursorColor: const Color(0xFF5425EA),
-      decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          color: Color(0xFF8B91A6),
-        ),
-        prefixIcon: Icon(
-          prefixIcon,
-          color: const Color(0xFF5425EA),
-          size: 25,
-        ),
-        suffixIcon: suffixIcon,
-        filled: true,
-        fillColor: Colors.white.withOpacity(.45),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 18,
-          vertical: 20,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18),
-          borderSide: const BorderSide(
-            color: Color(0xFFE1D9FF),
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18),
-          borderSide: const BorderSide(
-            color: Color(0xFFE1D9FF),
-            width: 1.2,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18),
-          borderSide: const BorderSide(
-            color: Color(0xFF5B2CF5),
-            width: 1.5,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18),
-          borderSide: const BorderSide(
-            color: Color(0xFFE5484D),
-          ),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18),
-          borderSide: const BorderSide(
-            color: Color(0xFFE5484D),
-            width: 1.5,
-          ),
-        ),
-        errorStyle: const TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════
-// LOGIN BUTTON
-// ═══════════════════════════════════════════════════════════════
-
+/// ═══════════════════════════════════════════════════════════════
+/// LOGIN BUTTON
 class _LoginButton extends StatelessWidget {
   const _LoginButton({
     required this.isLoading,
@@ -572,21 +331,20 @@ class _LoginButton extends StatelessWidget {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
           colors: [
-            Color(0xFF7622F5),
-            Color(0xFF4C32F4),
-            Color(0xFF148BEF),
+            AppColors.primaryPurple,
+            AppColors.skyBlue
           ],
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF5D2CF1).withOpacity(.25),
+            color: AppColors.textSecondary.withValues(alpha: .25),
             blurRadius: 18,
             offset: const Offset(0, 9),
           ),
         ],
       ),
       child: Material(
-        color: Colors.transparent,
+        color: AppColors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
           onTap: isLoading ? null : onPressed,
@@ -603,35 +361,21 @@ class _LoginButton extends StatelessWidget {
                     child: CircularProgressIndicator(
                       strokeWidth: 2.5,
                       valueColor: AlwaysStoppedAnimation<Color>(
-                        Colors.white,
+                        AppColors.white,
                       ),
                     ),
                   )
                 else
-                  const Text(
-                    'Log In',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
+                   Text(
+                    'Sign In',
+                    style: GoogleFonts.roboto(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w800,
                       color: Colors.white,
                     ),
                   ),
 
                 const Spacer(),
-
-                Container(
-                  width: 44,
-                  height: 44,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white.withOpacity(.16),
-                  ),
-                  child: const Icon(
-                    Icons.arrow_forward_rounded,
-                    color: Colors.white,
-                    size: 24,
-                  ),
-                ),
               ],
             ),
           ),

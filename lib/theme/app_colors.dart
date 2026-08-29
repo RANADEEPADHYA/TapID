@@ -11,6 +11,9 @@ class AppColors {
 
   static const Color textPrimary = Color(0xFF000000);
   static const Color textSecondary = Color(0xFF626875);
+  static const Color textTertiary = Color(0xFF8B91A6);
+
+  static const Color accentOrange = Color(0xFFE5484D);
 
   static const Color primaryPurple = Color(0xFF7051F5);
   static const Color primaryPurple1 = Color(0xFF7045FF);
@@ -24,6 +27,7 @@ class AppColors {
   static const Color darkBlue900 = Color(0xFF052F78);
   static const Color darkBlue950 = Color(0xFF021F52);
   static const Color purple50 = Color(0xFFFAF7FF);
+  static const Color purple400 = Color(0xFFBFA3FF);
 
   static const Color iconCircleDarkFull = Color(0xFF383246);
   static const Color iconCircleDarkBorder = Color(0xFF514A5D);
