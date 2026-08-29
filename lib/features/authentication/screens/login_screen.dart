@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../theme/app_colors.dart';
+import '../../../widgets/animated_arrow.dart';
 import '../../../widgets/app_name.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -52,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFF),
+      backgroundColor: AppColors.purple50,
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Stack(
@@ -96,32 +98,24 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
 
                             /// ─────────────────────────────────────────
-                            /// intro
+                            /// INTRO
                             Text(
                               'Your identity, secure and simplified.',
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w700,
+                              style: GoogleFonts.roboto(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
                                 color: AppColors.textSecondary,
-                                letterSpacing: .05,
                               ),
                             ),
 
-                            /// ─────────────────────────────
+                            /// ─────────────────────────────────────────
                             /// LOGIN FORM
 
                             Form(
                               key: _formKey,
                               child: Column(
                                 children: [
-                                  _GoogleButton(
-                                    onPressed: _continueWithGoogle,
-                                  ),
-
-                                  const SizedBox(height: 28),
-
-                                  const _OrDivider(),
 
                                   const SizedBox(height: 24),
 
@@ -208,12 +202,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                         tapTargetSize:
                                         MaterialTapTargetSize.shrinkWrap,
                                       ),
-                                      child: const Text(
+                                      child: Text(
                                         'Forgot password?',
-                                        style: TextStyle(
+                                        style: GoogleFonts.roboto(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w600,
-                                          color: Color(0xFF4D26E8),
+                                          color: AppColors.primaryPurple,
                                         ),
                                       ),
                                     ),
@@ -226,21 +220,25 @@ class _LoginScreenState extends State<LoginScreen> {
                                     onPressed: _login,
                                   ),
 
-                                  const SizedBox(height: 26),
 
+                                  /// ─────────────────────────────────────────
+                                  /// TEXT & TEXT BUTTON
                                   Row(
                                     mainAxisAlignment:
                                     MainAxisAlignment.center,
                                     children: [
                                       Text(
                                         "Don't have an account?",
-                                        style: TextStyle(
-                                          fontSize: 15,
+                                        style: GoogleFonts.roboto(
+                                          fontSize: 16,
                                           fontWeight: FontWeight.w400,
-                                          color: Colors.blueGrey.shade600,
+                                          color: AppColors.textSecondary,
                                         ),
                                       ),
+
                                       const SizedBox(width: 5),
+
+                                      /// SIGN UP TEXT BUTTON
                                       TextButton(
                                         onPressed: () {
                                           // TODO: Navigate to sign up
@@ -254,53 +252,103 @@ class _LoginScreenState extends State<LoginScreen> {
                                           tapTargetSize:
                                           MaterialTapTargetSize.shrinkWrap,
                                         ),
-                                        child: const Text(
+                                        child: Text(
                                           'Sign up',
-                                          style: TextStyle(
-                                            fontSize: 15,
+                                          style: GoogleFonts.roboto(
+                                            fontSize: 16,
                                             fontWeight: FontWeight.w600,
-                                            color: Color(0xFF4924E8),
+                                            color: AppColors.primaryPurple,
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
+
+                                  SizedBox(
+                                    height: (height * 0.01).clamp(20.0, 40.0).toDouble(),
+                                  ),
+
+                                  /// ─────────────────────────────────────────
+                                  /// DIVIDER & TEXT & DIVIDER
                                   Row(
                                     children: [
                                       Expanded(
                                         child: Container(
-                                          height: 1,
-                                          color: const Color(0xFFE1E5F1),
+                                          height: 0.5,
+                                          color: AppColors.textSecondary,
                                         ),
                                       ),
-                                      const Padding(
+                                      Padding(
                                         padding: EdgeInsets.symmetric(horizontal: 18),
                                         child: Text(
                                           'Or continue with email',
-                                          style: TextStyle(
+                                          style: GoogleFonts.roboto(
                                             fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            color: Color(0xFF707990),
+                                            fontWeight: FontWeight.w400,
+                                            color: AppColors.textSecondary,
                                           ),
                                         ),
                                       ),
                                       Expanded(
                                         child: Container(
-                                          height: 1,
-                                          color: const Color(0xFFE1E5F1),
+                                          height: 0.5,
+                                          color: AppColors.textSecondary,
                                         ),
                                       ),
                                     ],
                                   ),
+
+                                  SizedBox(
+                                    height: (height * 0.01).clamp(20.0, 40.0).toDouble(),
+                                  ),
+
+                                  _GoogleButton(
+                                    onPressed: _continueWithGoogle,
+                                  ),
+
                                 ],
                               ),
                             ),
 
                             const Spacer(),
 
-                            const _SecurityFooter(),
+                            /// ─────────────────────────────────────────
+                            /// LOGO
+                            Container(
+                              width: 58,
+                              height: 58,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: const Color(0xFFECE7FF),
+                                border: Border.all(
+                                  color: const Color(0xFFDCD2FF),
+                                ),
+                              ),
+                              child: const Center(
+                                child: Icon(
+                                  Icons.verified_user_rounded,
+                                  color: AppColors.primaryPurple,
+                                  size: 29,
+                                ),
+                              ),
+                            ),
 
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 12),
+
+                            /// ─────────────────────────────────────────
+                            /// FOOTER
+                            Text(
+                              'Your data is encrypted and secure',
+                              style: GoogleFonts.roboto(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.textSecondary,
+                              ),
+                            ),
+
+                            SizedBox(
+                              height: (height * 0.01).clamp(20.0, 40.0).toDouble(),
+                            ),
                           ],
                       ),
                     ),
@@ -334,7 +382,7 @@ class _GoogleButton extends StatelessWidget {
       color: Colors.white,
       borderRadius: BorderRadius.circular(20),
       elevation: 0,
-      shadowColor: Colors.black.withOpacity(.08),
+      shadowColor: Colors.black.withValues(alpha: .08),
       child: InkWell(
         borderRadius: BorderRadius.circular(20),
         onTap: onPressed,
@@ -342,14 +390,11 @@ class _GoogleButton extends StatelessWidget {
           height: 68,
           padding: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: const Color(0xFFE9ECF5),
-              width: 1,
-            ),
+            borderRadius: BorderRadius.circular(30),
+            color: AppColors.primaryPurple,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(.055),
+                color: Colors.black.withValues(alpha: .15),
                 blurRadius: 18,
                 offset: const Offset(0, 7),
               ),
@@ -357,83 +402,46 @@ class _GoogleButton extends StatelessWidget {
           ),
           child: Row(
             children: [
-              // Use the official Google icon asset in production.
-              SizedBox(
-                width: 38,
-                height: 38,
-                child: Image.asset(
-                  'assets/icons/google.png',
-                  errorBuilder: (_, __, ___) {
-                    return const Icon(
-                      Icons.g_mobiledata_rounded,
-                      size: 40,
-                      color: Color(0xFF4285F4),
-                    );
-                  },
-                ),
+
+              /// Use the official Google icon asset in production.
+              Container(
+              width: 42,
+              height: 42,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.white,
               ),
-
-              const SizedBox(width: 22),
-
-              const Expanded(
-                child: Text(
-                  'Continue with Google',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF172B55),
+              child: Center(
+                child:  Image.asset(
+                  'assets/images/icon/ic_google.png',
+                  width: 22,
+                  height: 22,
+                  fit: BoxFit.contain,
                   ),
                 ),
               ),
 
-              const Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 20,
-                color: Color(0xFF5425EA),
+              const SizedBox(width: 15),
+
+              Expanded(
+                child: Text(
+                  'Continue with Google',
+                  style: GoogleFonts.roboto(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.white,
+                  ),
+                ),
+              ),
+
+              const AnimatedArrow(
+                size: 32,
+                color: Colors.white,
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════
-// DIVIDER
-// ═══════════════════════════════════════════════════════════════
-
-class _OrDivider extends StatelessWidget {
-  const _OrDivider();
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            height: 1,
-            color: const Color(0xFFE1E5F1),
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 18),
-          child: Text(
-            'Or continue with email',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF707990),
-            ),
-          ),
-        ),
-        Expanded(
-          child: Container(
-            height: 1,
-            color: const Color(0xFFE1E5F1),
-          ),
-        ),
-      ],
     );
   }
 }
@@ -629,51 +637,6 @@ class _LoginButton extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════
-// SECURITY FOOTER
-// ═══════════════════════════════════════════════════════════════
-
-class _SecurityFooter extends StatelessWidget {
-  const _SecurityFooter();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 58,
-          height: 58,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: const Color(0xFFECE7FF),
-            border: Border.all(
-              color: const Color(0xFFDCD2FF),
-            ),
-          ),
-          child: const Center(
-            child: Icon(
-              Icons.verified_user_rounded,
-              color: Color(0xFF5225E8),
-              size: 29,
-            ),
-          ),
-        ),
-
-        const SizedBox(height: 12),
-
-        Text(
-          'Your data is encrypted and secure',
-          style: TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
-            color: Colors.blueGrey.shade600,
-          ),
-        ),
-      ],
     );
   }
 }
