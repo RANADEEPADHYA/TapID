@@ -20,7 +20,6 @@ class WelcomeText extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
 
-
         /// ─────────────────────────────────────────────
         /// APP LOGO
         Image.asset(
@@ -31,9 +30,7 @@ class WelcomeText extends StatelessWidget {
         ),
 
         SizedBox(
-          height: (height * 0.01)
-              .clamp(20.0, 40.0)
-              .toDouble(),
+          height: (height * 0.01).clamp(20.0, 40.0).toDouble(),
         ),
 
 
@@ -46,9 +43,7 @@ class WelcomeText extends StatelessWidget {
         ),
 
         SizedBox(
-          height: (height * 0.01)
-              .clamp(10.0, 30.0)
-              .toDouble(),
+          height: (height * 0.01).clamp(10.0, 30.0).toDouble(),
         ),
 
 
@@ -67,9 +62,7 @@ class WelcomeText extends StatelessWidget {
         /// ─────────────────────────────────────────────
         /// Space
         SizedBox(
-          height: (height * 0.01)
-              .clamp(20.0, 40.0)
-              .toDouble(),
+          height: (height * 0.01).clamp(20.0, 40.0).toDouble(),
         ),
 
         /// ─────────────────────────────────────────────

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
 
 class AnimatedArrow extends StatefulWidget {
   const AnimatedArrow({
     super.key,
     this.size = 24,
-    this.color = Colors.white,
+    this.color = AppColors.white,
   });
 
   final double size;

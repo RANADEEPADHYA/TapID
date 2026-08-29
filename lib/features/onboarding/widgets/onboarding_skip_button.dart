@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../theme/app_colors.dart';
 
 class OnboardingSkipButton extends StatelessWidget {
   const OnboardingSkipButton({
     super.key,
     required this.onTap,
   });
-
   final VoidCallback onTap;
 
   @override
@@ -27,7 +27,7 @@ class OnboardingSkipButton extends StatelessWidget {
               style: GoogleFonts.roboto(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: Colors.black,
+                color: AppColors.black,
                 decoration: TextDecoration.underline,
               ),
             ),
@@ -36,7 +36,7 @@ class OnboardingSkipButton extends StatelessWidget {
               style: GoogleFonts.roboto(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: Colors.black,
+                color: AppColors.black,
               ),
             ),
           ],

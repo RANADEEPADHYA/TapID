@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../theme/app_colors.dart';
 import '../controllers/startup_step.dart';
 
 class IntroStartupStatusRow extends StatelessWidget {
@@ -42,7 +43,7 @@ class IntroStartupStatusRow extends StatelessWidget {
                   Container(
                     width: 1,
                     height: compact ? 58 : 72,
-                    color: const Color(0xFF383246),
+                    color: AppColors.iconCircleDarkFull,
                   ),
               ],
             ),
@@ -83,12 +84,12 @@ class _StatusItem extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: active
-                  ? const Color(0xFF7051F5).withValues(alpha: 0.15)
-                  : const Color(0xFF383246).withValues(alpha: 0.5),
+                  ? AppColors.primaryPurple.withValues(alpha: 0.15)
+                  : AppColors.iconCircleDarkFull.withValues(alpha: 0.5),
               border: Border.all(
                 color: active
-                    ? const Color(0xFF875DFF).withValues(alpha: 0.6)
-                    : const Color(0xFF514A5D),
+                    ? AppColors.primaryPurple1.withValues(alpha: 0.6)
+                    : AppColors.iconCircleDarkBorder,
                 width: 1.5,
               ),
             ),
@@ -100,9 +101,9 @@ class _StatusItem extends StatelessWidget {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      Color(0xFFFF43D9),
-                      Color(0xFF875DFF),
-                      Color(0xFF438CFF),
+                      AppColors.brandPink,
+                      AppColors.primaryPurple1,
+                      AppColors.primaryBlue,
                     ],
                   ).createShader(
                     Rect.fromLTWH(
@@ -117,13 +118,13 @@ class _StatusItem extends StatelessWidget {
                 child: Icon(
                   step.icon,
                   size: compact ? 21 : 25,
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
               )
                   : Icon(
                 step.icon,
                 size: compact ? 21 : 25,
-                color: const Color(0xFF979797),
+                color: AppColors.textSecondary,
               ),
             ),
           ),
@@ -143,8 +144,8 @@ class _StatusItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.roboto(
               color: active
-                  ? Colors.white
-                  : const Color(0xFF777386),
+                  ? AppColors.white
+                  : AppColors.textSecondary,
               fontSize: 14 ,
               fontWeight: FontWeight.w500,
             ),
@@ -159,8 +160,8 @@ class _StatusItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.roboto(
               color: active
-                  ? Colors.white
-                  : const Color(0xFF696474),
+                  ? AppColors.white
+                  : AppColors.textSecondary,
               fontSize: 14 ,
               fontWeight: FontWeight.w500,
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../theme/app_colors.dart';
 import '../../../widgets/animated_arrow.dart';
 
 class OnboardingNextButton extends StatelessWidget {
@@ -9,7 +10,6 @@ class OnboardingNextButton extends StatelessWidget {
     required this.onTap,
     this.label = 'Next',
   });
-
   final VoidCallback onTap;
   final String label;
 
@@ -29,8 +29,8 @@ class OnboardingNextButton extends StatelessWidget {
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             colors: [
-              Color(0xFF7051F5),
-              Color(0xFF7754ED),
+              AppColors.primaryPurple,
+              AppColors.nextButtonPurple,
             ],
           ),
           borderRadius: BorderRadius.circular(36),
@@ -46,7 +46,7 @@ class OnboardingNextButton extends StatelessWidget {
                 style: GoogleFonts.roboto(
                   fontSize: 28,
                   fontWeight: FontWeight.w800,
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
               ),
             ),
@@ -57,7 +57,7 @@ class OnboardingNextButton extends StatelessWidget {
               right: 0,
               child: AnimatedArrow(
                 size: 40,
-                color: Colors.white,
+                color: AppColors.white,
               ),
             ),
           ],

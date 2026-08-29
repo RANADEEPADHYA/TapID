@@ -1,12 +1,12 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:tab_id/theme/app_colors.dart';
 
 class LoadingSpinner extends StatelessWidget {
   const LoadingSpinner({
     super.key,
     required this.value,
   });
-
   final double value;
 
   @override
@@ -47,8 +47,8 @@ class LoadingSpinnerPainter extends CustomPainter {
 
       final paint = Paint()
         ..color = Color.lerp(
-          const Color(0xFF3E7BFF),
-          const Color(0xFFFF43D9),
+          AppColors.primaryBlue,
+          AppColors.brandPink,
           i / 9,
         )!.withValues(
           alpha: (i + 1) / 10,

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../theme/app_colors.dart';
 import '../../../widgets/animated_arrow.dart';
 import '../../../widgets/loading_spinner.dart';
 
@@ -101,20 +102,14 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         border: Border.all(
-          color: const Color(0xFF7045FF).withValues(
-            alpha: 0.45,
-          ),
+          color: AppColors.primaryPurple1.withValues(alpha: 0.45,),
           width: 1,
         ),
 
         gradient: LinearGradient(
           colors: [
-            const Color(0xFF7045FF).withValues(
-              alpha: 0.12,
-            ),
-            const Color(0xFFFF45DB).withValues(
-              alpha: 0.08,
-            ),
+            AppColors.primaryPurple1.withValues(alpha: 0.12,),
+            AppColors.brandPink.withValues(alpha: 0.08,),
           ],
         ),
       ),
@@ -141,7 +136,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
           Text(
             widget.loadingText,
             style: GoogleFonts.lobsterTwo(
-              color: Colors.white,
+              color: AppColors.white,
               fontSize: 28,
               fontWeight: FontWeight.w800,
               fontStyle: FontStyle.italic,
@@ -160,7 +155,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
       width: width,
 
       child: Material(
-        color: Colors.transparent,
+        color: AppColors.transparent,
 
         child: InkWell(
           borderRadius: BorderRadius.circular(30),
@@ -178,7 +173,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               border: Border.all(
-                color: const Color(0xFF438CFF).withValues(
+                color: AppColors.primaryBlue.withValues(
                   alpha: 0.55,
                 ),
                 width: 1,
@@ -186,14 +181,14 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
 
               gradient: const LinearGradient(
                 colors: [
-                  Color(0xFF7045FF),
-                  Color(0xFF438CFF),
+                  AppColors.primaryPurple1,
+                  AppColors.primaryBlue,
                 ],
               ),
 
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF7045FF).withValues(
+                  color: AppColors.primaryPurple1.withValues(
                     alpha: 0.35,
                   ),
                   blurRadius: 18,
@@ -216,7 +211,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
                     /// Icon
                     const Icon(
                       Icons.check_circle_rounded,
-                      color: Colors.white,
+                      color: AppColors.white,
                       size: 32,
                     ),
 
@@ -225,7 +220,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
                     Text(
                       widget.finishedText,
                       style: GoogleFonts.roboto(
-                        color: Colors.white,
+                        color: AppColors.white,
                         fontSize: 28,
                         fontWeight: FontWeight.w800,
                       ),
@@ -239,7 +234,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
                   right: 0,
                   child: AnimatedArrow(
                     size: 40,
-                    color: Colors.white,
+                    color: AppColors.white,
                   ),
                 ),
               ],

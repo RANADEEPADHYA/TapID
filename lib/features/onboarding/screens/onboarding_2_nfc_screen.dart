@@ -11,7 +11,7 @@ class Onboarding2NfcScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.transparent,
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -156,7 +156,7 @@ class _OnboardingHeader extends StatelessWidget {
           style: GoogleFonts.lobsterTwo(
             fontSize: 45,
             fontWeight: FontWeight.w900,
-            color: const Color(0xFF7051F5),
+            color: AppColors.primaryPurple,
           ),
         ),
       ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../theme/app_colors.dart';
+
 class OnboardingPageIndicator extends StatelessWidget {
   const OnboardingPageIndicator({
     super.key,
@@ -29,8 +31,8 @@ class OnboardingPageIndicator extends StatelessWidget {
             height: 10,
             decoration: BoxDecoration(
               color: isActive
-                  ? const Color(0xFF7051F5)
-                  : const Color(0xFFE4DDF5),
+                  ? AppColors.primaryPurple
+                  : AppColors.pageIndicatorInactive,
               borderRadius: BorderRadius.circular(20),
             ),
           );

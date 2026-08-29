@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../theme/app_colors.dart';
+
 class AppName extends StatelessWidget {
   const AppName({
     super.key,
     this.fontSize = 40,
     this.fontWeight = FontWeight.w600,
-    this.color = Colors.white,
+    this.color = AppColors.white,
     this.splitColor = false,
-    this.tapColor = Colors.white,
-    this.idColor = const Color(0xFF7051F5),
+    this.tapColor = AppColors.white,
+    this.idColor = AppColors.primaryPurple,
   });
-
   final double fontSize;
   final FontWeight fontWeight;
   final Color color;

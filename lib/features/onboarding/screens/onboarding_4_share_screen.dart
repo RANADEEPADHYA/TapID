@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tab_id/features/onboarding/widgets/onboarding_main_illustration.dart';
 
+import '../../../theme/app_colors.dart';
+
 class Onboarding4ShareScreen extends StatelessWidget {
   const Onboarding4ShareScreen({
     super.key,
@@ -10,7 +12,7 @@ class Onboarding4ShareScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.transparent,
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -67,7 +69,7 @@ class Onboarding4ShareScreen extends StatelessWidget {
                               style: GoogleFonts.roboto(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
-                                color: const Color(0xFF626875),
+                                color: AppColors.textSecondary,
                               ),
                             ),
 
@@ -95,7 +97,7 @@ class Onboarding4ShareScreen extends StatelessWidget {
                                 style: GoogleFonts.roboto(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w800,
-                                  color: Colors.black,
+                                  color: AppColors.black,
                                 ),
                               ),
                             ),
@@ -109,7 +111,7 @@ class Onboarding4ShareScreen extends StatelessWidget {
                                 style: GoogleFonts.roboto(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF626875),
+                                  color: AppColors.textSecondary,
                                 ),
                               ),
                             ),
@@ -147,7 +149,7 @@ class _OnboardingHeader extends StatelessWidget {
           style: GoogleFonts.roboto(
             fontSize: 28,
             fontWeight: FontWeight.w700,
-            color: Colors.black,
+            color: AppColors.black,
           ),
         ),
         Text(
@@ -155,7 +157,7 @@ class _OnboardingHeader extends StatelessWidget {
           style: GoogleFonts.lobsterTwo(
             fontSize: 45,
             fontWeight: FontWeight.w900,
-            color: const Color(0xFF7051F5),
+            color: AppColors.primaryPurple,
           ),
         ),
       ],

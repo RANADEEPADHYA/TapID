@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tab_id/main.dart';
 import '../controllers/onboarding_controller.dart';
-import '../widgets/onboarding_bottom_navigation.dart';
+import '../widgets/onboarding_next_button.dart';
 import '../widgets/onboarding_page_indicator.dart';
 import '../widgets/onboarding_skip_button.dart';
 import 'onboarding_1_one_tap_screen.dart';
@@ -74,7 +73,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     final bool isLastPage = controller.isLastPage;
     return Scaffold(
       body: BackgroundOnboarding(
@@ -109,7 +107,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
               /// ═══════════════════════════════════════════════════
               /// PAGE INDICATOR
-
               Positioned(
                 left: 0,
                 right: 0,
@@ -121,15 +118,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
 
               /// ═══════════════════════════════════════════════════
-              /// BOTTOM NAVIGATION
+              /// NEXT BUTTON
               Positioned(
                 left: 20,
                 right: 20,
                 bottom: 20,
-                child: OnboardingBottomNavigation(
-                  currentPage: controller.currentPage,
-                  totalPages: OnboardingController.totalPages,
-                  onNext: _handleNext,
+                child: OnboardingNextButton(
+                  label: isLastPage ? 'Get Started' : 'Next',
+                  onTap: _handleNext,
                 ),
               ),
             ],

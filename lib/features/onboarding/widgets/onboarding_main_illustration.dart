@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tab_id/theme/app_colors.dart';
 
 class OnboardingMainIllustration extends StatelessWidget {
   const OnboardingMainIllustration({
@@ -28,10 +29,10 @@ class OnboardingMainIllustration extends StatelessWidget {
             height: size.width * 0.82,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: const Color(0xFF7655EF).withValues(alpha: 0.15),
+              color: AppColors.onboardingMainIllusion.withValues(alpha: 0.15),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF7655EF).withValues(alpha: 0.05),
+                  color: AppColors.onboardingMainIllusion.withValues(alpha: 0.05),
                   blurRadius: 60,
                   spreadRadius: 20,
                 ),
@@ -46,7 +47,7 @@ class OnboardingMainIllustration extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: const Color(0xFF7655EF).withValues(alpha: 0.15),
+                color: AppColors.onboardingMainIllusion.withValues(alpha: 0.15),
                 width: 2,
               ),
             ),

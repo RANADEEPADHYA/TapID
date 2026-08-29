@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tab_id/features/onboarding/widgets/onboarding_main_illustration.dart';
+import '../../../theme/app_colors.dart';
 
 class Onboarding5GetStartedScreen extends StatelessWidget {
   const Onboarding5GetStartedScreen({
@@ -10,7 +11,7 @@ class Onboarding5GetStartedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.transparent,
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -19,10 +20,7 @@ class Onboarding5GetStartedScreen extends StatelessWidget {
 
             /// ─────────────────────────────────────────────
             /// Responsive horizontal padding
-            final horizontalPadding = (width * 0.07).clamp(
-              20.0,
-              80.0,
-            );
+            final horizontalPadding = (width * 0.07).clamp(20.0, 80.0,);
 
             /// ─────────────────────────────────────────────
             /// Limit content width on tablets / desktop
@@ -67,7 +65,7 @@ class Onboarding5GetStartedScreen extends StatelessWidget {
                               style: GoogleFonts.roboto(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
-                                color: const Color(0xFF626875),
+                                color: AppColors.textSecondary,
                               ),
                             ),
 
@@ -95,7 +93,7 @@ class Onboarding5GetStartedScreen extends StatelessWidget {
                                 style: GoogleFonts.roboto(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w800,
-                                  color: Colors.black,
+                                  color: AppColors.black,
                                 ),
                               ),
                             ),
@@ -109,7 +107,7 @@ class Onboarding5GetStartedScreen extends StatelessWidget {
                                 style: GoogleFonts.roboto(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF626875),
+                                  color: AppColors.textSecondary,
                                 ),
                               ),
                             ),
@@ -147,7 +145,7 @@ class _OnboardingHeader extends StatelessWidget {
           style: GoogleFonts.roboto(
             fontSize: 28,
             fontWeight: FontWeight.w700,
-            color: Colors.black,
+            color: AppColors.black,
           ),
         ),
         Text(
@@ -155,7 +153,7 @@ class _OnboardingHeader extends StatelessWidget {
           style: GoogleFonts.lobsterTwo(
             fontSize: 45,
             fontWeight: FontWeight.w900,
-            color: const Color(0xFF7051F5),
+            color: AppColors.primaryPurple,
           ),
         ),
       ],

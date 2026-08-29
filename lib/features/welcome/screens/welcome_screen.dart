@@ -1,9 +1,7 @@
 import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:tab_id/features/onboarding/screens/onboarding_screen.dart';
 import 'package:tab_id/theme/app_colors.dart';
-
 import '../controllers/startup_step.dart';
 import '../controllers/welcome_controller.dart';
 import '../widgets/intro_startup_status_row.dart';
@@ -88,7 +86,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
         _entranceController.forward();
       }
     });
-
     _controller.start();
   }
 
@@ -96,7 +93,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   /// CONTROLLER UPDATE
   void _onControllerChanged() {
     if (!mounted) return;
-
     setState(() {});
   }
 
@@ -107,7 +103,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       ..dispose();
 
     _entranceController.dispose();
-
     super.dispose();
   }
 
@@ -209,11 +204,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
                       /// ═══════════════════════════════════════
                       /// SPACING
-                      SizedBox(
-                        height: (height * 0.03)
-                            .clamp(20.0, 40.0)
-                            .toDouble(),
-                      ),
+                      SizedBox(height: (height * 0.03).clamp(20.0, 40.0).toDouble(),),
 
                       /// ═══════════════════════════════════════
                       /// STARTUP STATUS
@@ -230,9 +221,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
                       /// ═══════════════════════════════════════
                       /// SPACING
-                      SizedBox(
-                        height: (height * 0.06).toDouble(),
-                      ),
+                      SizedBox(height: (height * 0.06).toDouble(),),
 
                       /// ═══════════════════════════════════════
                       /// PROGRESS
@@ -247,11 +236,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
                       /// ═══════════════════════════════════════
                       /// SPACING
-                      SizedBox(
-                        height: (height * 0.01)
-                            .clamp(12.0, 24.0)
-                            .toDouble(),
-                      ),
+                      SizedBox(height: (height * 0.01).clamp(12.0, 24.0).toDouble(),),
 
                       /// ═══════════════════════════════════════
                       /// LOADING BUTTON

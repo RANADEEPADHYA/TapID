@@ -6,22 +6,18 @@ class WelcomeController extends ChangeNotifier {
     this.minimumDuration = const Duration(seconds: 4),
     this.onFinished,
   });
-
   final Future<void> Function()? initializeApp;
   final Duration minimumDuration;
   final VoidCallback? onFinished;
-
   int _currentStep = 0;
   double _progress = 0.0;
   bool _finished = false;
-
   int get currentStep => _currentStep;
   double get progress => _progress;
   bool get finished => _finished;
 
   Future<void> start() async {
     final stopwatch = Stopwatch()..start();
-
     try {
       if (initializeApp != null) {
         await initializeApp!();
@@ -35,20 +31,14 @@ class WelcomeController extends ChangeNotifier {
     }
 
     stopwatch.stop();
-
-    final Duration remaining =
-        minimumDuration - stopwatch.elapsed;
+    final Duration remaining = minimumDuration - stopwatch.elapsed;
 
     if (remaining > Duration.zero) {
       await Future<void>.delayed(remaining);
     }
-
     if (_finished) return;
-
     _finished = true;
-
     notifyListeners();
-
     onFinished?.call();
   }
 
@@ -85,7 +75,6 @@ class WelcomeController extends ChangeNotifier {
   }) async {
     _currentStep = step;
     _progress = progress;
-
     notifyListeners();
     await Future<void>.delayed(delay);
   }
