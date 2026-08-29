@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tab_id/features/onboarding/widgets/onboarding_main_illustration.dart';
+import 'package:tab_id/theme/app_colors.dart';
 
 class Onboarding2NfcScreen extends StatelessWidget {
   const Onboarding2NfcScreen({
@@ -67,7 +68,7 @@ class Onboarding2NfcScreen extends StatelessWidget {
                               style: GoogleFonts.roboto(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
-                                color: const Color(0xFF626875),
+                                color: AppColors.textSecondary,
                               ),
                             ),
 
@@ -95,7 +96,7 @@ class Onboarding2NfcScreen extends StatelessWidget {
                                 style: GoogleFonts.roboto(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w800,
-                                  color: Colors.black,
+                                  color: AppColors.textPrimary,
                                 ),
                               ),
                             ),
@@ -109,7 +110,7 @@ class Onboarding2NfcScreen extends StatelessWidget {
                                 style: GoogleFonts.roboto(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
-                                  color: const Color(0xFF626875),
+                                  color: AppColors.textSecondary,
                                 ),
                               ),
                             ),
@@ -147,7 +148,7 @@ class _OnboardingHeader extends StatelessWidget {
           style: GoogleFonts.roboto(
               fontSize: 28,
               fontWeight: FontWeight.w700,
-              color: Colors.black,
+              color: AppColors.textPrimary,
           ),
         ),
         Text(

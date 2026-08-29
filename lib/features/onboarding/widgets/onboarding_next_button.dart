@@ -33,7 +33,7 @@ class OnboardingNextButton extends StatelessWidget {
               Color(0xFF7754ED),
             ],
           ),
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(36),
         ),
         child: Stack(
           alignment: Alignment.center,
@@ -44,8 +44,8 @@ class OnboardingNextButton extends StatelessWidget {
               child: Text(
                 label,
                 style: GoogleFonts.roboto(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800,
                   color: Colors.white,
                 ),
               ),
