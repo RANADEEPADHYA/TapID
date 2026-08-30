@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tab_id/features/authentication/screens/sign_up_screen.dart';
 import 'package:tab_id/features/welcome/screens/welcome_screen.dart';
 
 void main() {
@@ -12,22 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WelcomeScreen(
-        /// Welcome screen will remain for at least 10 seconds.
-        minimumDuration: const Duration(seconds: 10),
-
-        /// After 10 seconds, go to Home Page.
-        onFinished: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (_) => const MyHomePage(
-                title: 'Home Page',
-              ),
-            ),
-          );
-        },
-      ),
+      home: SignUpScreen(),
     );
   }
 }
