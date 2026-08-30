@@ -39,11 +39,14 @@ class EmailInputField extends StatelessWidget {
           color: AppColors.textSecondary,
         ),
 
-        // Email icon
-        prefixIcon: const Icon(
-          Icons.mail_outline_rounded,
-          color: AppColors.primaryPurple,
-          size: 25,
+        /// Email icon
+        prefixIcon:const Padding(
+          padding: EdgeInsets.only(left: 18, right: 8),
+          child: Icon(
+            Icons.mail_outline_rounded,
+            color: AppColors.primaryPurple,
+            size: 25,
+          ),
         ),
 
         filled: true,

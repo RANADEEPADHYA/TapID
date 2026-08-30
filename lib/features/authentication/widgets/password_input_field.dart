@@ -51,38 +51,46 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
           color: AppColors.textSecondary,
         ),
 
-        /// Password icon
-        prefixIcon: const Icon(
-          Icons.lock_outline_rounded,
-          color: AppColors.primaryPurple,
-          size: 25,
+        //// Password icon
+        prefixIcon: const Padding(
+          padding: EdgeInsets.only(left: 18, right: 8),
+          child: Icon(
+            Icons.lock_outline_rounded,
+            color: AppColors.primaryPurple,
+            size: 25,
+          ),
         ),
 
         /// Show / hide password
-        suffixIcon: IconButton(
-          tooltip: _obscurePassword
-              ? 'Show password'
-              : 'Hide password',
-          onPressed: () {
-            setState(() {
-              _obscurePassword = !_obscurePassword;
-            });
-          },
-          icon: Icon(
-            _obscurePassword
-                ? Icons.visibility_outlined
-                : Icons.visibility_off_outlined,
-            size: 23,
-            color: AppColors.primaryPurple,
+        suffixIcon: Padding(
+          padding: const EdgeInsets.only(left: 8, right: 18),
+          child: IconButton(
+            tooltip: _obscurePassword
+                ? 'Show password'
+                : 'Hide password',
+            onPressed: () {
+              setState(() {
+                _obscurePassword = !_obscurePassword;
+              });
+            },
+            icon: Icon(
+              _obscurePassword
+                  ? Icons.visibility_outlined
+                  : Icons.visibility_off_outlined,
+              size: 23,
+              color: AppColors.primaryPurple,
+            ),
           ),
         ),
 
         filled: true,
         fillColor: AppColors.white.withValues(alpha: .45),
 
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 18,
+        contentPadding: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+          top: 18,
+          bottom: 18,
         ),
 
         /// Default border

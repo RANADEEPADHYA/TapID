@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../theme/app_colors.dart';
-import '../../../widgets/animated_arrow.dart';
 import '../../../widgets/app_name.dart';
 import '../widgets/auth_google_button.dart';
+import '../widgets/auth_submit_button.dart';
 import '../widgets/email_input_field.dart';
 import '../widgets/password_input_field.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({
     super.key,
   });
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
-class _LoginScreenState extends State<LoginScreen> {
+
+class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _obscurePassword = true;
   bool _isLoading = false;
 
   @override
@@ -116,9 +115,51 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
 
+
+                            SizedBox(
+                              height: (height * 0.01).clamp(20.0, 40.0).toDouble(),
+                            ),
+
+                            AuthGoogleButton(
+                              onPressed: _continueWithGoogle,
+                            ),
+
+                            SizedBox(
+                              height: (height * 0.01).clamp(30.0, 40.0).toDouble(),
+                            ),
+
+                            /// ─────────────────────────────────────────
+                            /// DIVIDER & TEXT & DIVIDER
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    height: 0.5,
+                                    color: AppColors.textSecondary,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 18),
+                                  child: Text(
+                                    'Or continue with email',
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColors.textSecondary,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    height: 0.5,
+                                    color: AppColors.textSecondary,
+                                  ),
+                                ),
+                              ],
+                            ),
+
                             /// ─────────────────────────────────────────
                             /// LOGIN FORM
-
                             Form(
                               key: _formKey,
                               child: Column(
@@ -126,18 +167,23 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                   const SizedBox(height: 24),
 
+                                  /// ─────────────────────────────────────────
+                                  /// EMAIL
                                   EmailInputField(
                                     controller: _emailController,
                                   ),
 
                                   const SizedBox(height: 14),
 
+                                  /// ─────────────────────────────────────────
+                                  /// PASSWORD
                                   PasswordInputField(
                                     controller: _passwordController,
                                     onSubmitted: (_) => _login(),
                                   ),
 
-
+                                  /// ─────────────────────────────────────────
+                                  /// FORGET PASSWORD
                                   Align(
                                     alignment: Alignment.centerRight,
                                     child: TextButton(
@@ -166,9 +212,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                   const SizedBox(height: 16),
 
-                                  _LoginButton(
+                                  /// ─────────────────────────────────────────
+                                  /// SIGN IN BUTTON
+                                  AuthSubmitButton(
                                     isLoading: _isLoading,
                                     onPressed: _login,
+                                    text: 'Sign In',
                                   ),
 
 
@@ -204,7 +253,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           MaterialTapTargetSize.shrinkWrap,
                                         ),
                                         child: Text(
-                                          'Sign up',
+                                          'Sign Up',
                                           style: GoogleFonts.roboto(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
@@ -213,48 +262,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                       ),
                                     ],
-                                  ),
-
-                                  SizedBox(
-                                    height: (height * 0.01).clamp(20.0, 40.0).toDouble(),
-                                  ),
-
-                                  /// ─────────────────────────────────────────
-                                  /// DIVIDER & TEXT & DIVIDER
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          height: 0.5,
-                                          color: AppColors.textSecondary,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(horizontal: 18),
-                                        child: Text(
-                                          'Or continue with email',
-                                          style: GoogleFonts.roboto(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
-                                            color: AppColors.textSecondary,
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          height: 0.5,
-                                          color: AppColors.textSecondary,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-
-                                  SizedBox(
-                                    height: (height * 0.01).clamp(20.0, 40.0).toDouble(),
-                                  ),
-
-                                  AuthGoogleButton(
-                                    onPressed: _continueWithGoogle,
                                   ),
 
                                 ],
@@ -304,81 +311,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-/// ═══════════════════════════════════════════════════════════════
-/// LOGIN BUTTON
-class _LoginButton extends StatelessWidget {
-  const _LoginButton({
-    required this.isLoading,
-    required this.onPressed,
-  });
-
-  final bool isLoading;
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 64,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        gradient: const LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: [
-            AppColors.primaryPurple,
-            AppColors.skyBlue
-          ],
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.textSecondary.withValues(alpha: .25),
-            blurRadius: 18,
-            offset: const Offset(0, 9),
-          ),
-        ],
-      ),
-      child: Material(
-        color: AppColors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(20),
-          onTap: isLoading ? null : onPressed,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Row(
-              children: [
-                const Spacer(),
-
-                if (isLoading)
-                  const SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2.5,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        AppColors.white,
-                      ),
-                    ),
-                  )
-                else
-                   Text(
-                    'Sign In',
-                    style: GoogleFonts.roboto(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w800,
-                      color: Colors.white,
-                    ),
-                  ),
-
-                const Spacer(),
-              ],
-            ),
-          ),
         ),
       ),
     );

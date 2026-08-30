@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tab_id/features/authentication/screens/login_screen.dart';
+import 'package:tab_id/features/authentication/screens/sign_in_screen.dart';
 import 'package:tab_id/main.dart';
 import '../controllers/onboarding_controller.dart';
 import '../widgets/onboarding_next_button.dart';
@@ -48,7 +48,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void _goToHome() {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (_) => const LoginScreen()
+        builder: (_) => const SignInScreen()
       ),
           (route) => false,
     );
