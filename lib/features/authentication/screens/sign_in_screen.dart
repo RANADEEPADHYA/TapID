@@ -6,6 +6,7 @@ import '../widgets/auth_google_button.dart';
 import '../widgets/auth_submit_button.dart';
 import '../widgets/email_input_field.dart';
 import '../widgets/password_input_field.dart';
+import 'sign_up_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({
@@ -51,6 +52,16 @@ class _SignInScreenState extends State<SignInScreen> {
     FocusScope.of(context).unfocus();
 
     // TODO: Add Google authentication here.
+  }
+
+  /// ═══════════════════════════════════════════════════════════════
+  /// GO TO SIGN IN
+  void _goToSignUp() {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => const SignUpScreen(),
+      ),
+    );
   }
 
   @override
@@ -240,9 +251,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                                       /// SIGN UP TEXT BUTTON
                                       TextButton(
-                                        onPressed: () {
-                                          // TODO: Navigate to sign up
-                                        },
+                                        onPressed: _goToSignUp,
                                         style: TextButton.styleFrom(
                                           padding: const EdgeInsets.symmetric(
                                             horizontal: 3,

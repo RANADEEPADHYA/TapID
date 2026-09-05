@@ -7,6 +7,7 @@ import '../widgets/auth_submit_button.dart';
 import '../widgets/email_input_field.dart';
 import '../widgets/name_input_field.dart';
 import '../widgets/password_input_field.dart';
+import 'sign_in_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({
@@ -85,7 +86,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   /// ═══════════════════════════════════════════════════════════════
   /// GO TO SIGN IN
   void _goToSignIn() {
-    Navigator.of(context).pop();
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => const SignInScreen(),
+      ),
+    );
   }
 
   @override
@@ -230,13 +235,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             key: _formKey,
                             child: Column(
                               children: [
-                                /// ─────────────────────────────────
-                                /// NAME
-                                NameInputField(
-                                  controller: _nameController,
-                                ),
-
-                                const SizedBox(height: 14),
 
                                 /// ─────────────────────────────────
                                 /// EMAIL
@@ -389,6 +387,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   mainAxisAlignment:
                                   MainAxisAlignment.center,
                                   children: [
+
                                     Text(
                                       'Already have an account?',
                                       style: GoogleFonts.roboto(
@@ -415,7 +414,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             .shrinkWrap,
                                       ),
                                       child: Text(
-                                        'Log in',
+                                        'Sign in',
                                         style: GoogleFonts.roboto(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
@@ -463,11 +462,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               color: AppColors.textSecondary,
                             ),
                           ),
-                          SizedBox(
-                            height: (height * 0.01)
-                                .clamp(12.0, 24.0)
-                                .toDouble(),
-                          ),
+
+                          SizedBox(height: (height * 0.01).clamp(12.0, 24.0).toDouble(),),
                         ],
                       ),
                     ),
