@@ -124,73 +124,60 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-
                           /// ═══════════════════════════════════════════
-                          /// BACK BUTTON
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: IconButton(
-                              onPressed: _goBack,
-                              icon: const Icon(
-                                Icons.arrow_back_rounded,
-                                size: 32,
-                                color: AppColors.black,
+                          /// BRAND + TEXT
+                          Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              /// LEFT — TEXT
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+
+                                    SizedBox(
+                                      height: (height * 0.01).clamp(20.0, 40.0).toDouble(),
+                                    ),
+
+                                    /// TITLE
+                                    Text(
+                                      'Create your account',
+                                      textAlign: TextAlign.left,
+                                      style: GoogleFonts.roboto(
+                                        fontSize: 32,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppColors.black,
+                                      ),
+                                    ),
+
+                                    const SizedBox(height: 8),
+
+                                    /// SUBTITLE
+                                    Text(
+                                      'Join TapID and simplify your identity verification.',
+                                      textAlign: TextAlign.left,
+                                      style: GoogleFonts.roboto(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.textSecondary,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              padding: EdgeInsets.zero,
-                              constraints: const BoxConstraints(
-                                minWidth: 48,
-                                minHeight: 48,
+
+                              const SizedBox(width: 20),
+
+                              /// RIGHT — LOGO
+                              Image.asset(
+                                'assets/images/TabID_transparent.png',
+                                width: width * 0.30,
+                                height: width * 0.30,
+                                fit: BoxFit.contain,
                               ),
-                            ),
+                            ],
                           ),
 
-                          const SizedBox(height: 8),
-
-                          /// ═══════════════════════════════════════════
-                          /// BRAND
-                          Image.asset(
-                            'assets/images/TabID_transparent.png',
-                            width: width * 0.34,
-                            height: width * 0.34,
-                            fit: BoxFit.contain,
-                          ),
-
-                          const SizedBox(height: 4),
-
-                          const AppName(
-                            fontSize: 48,
-                            fontWeight: FontWeight.w900,
-                            splitColor: true,
-                            tapColor: AppColors.black,
-                          ),
-
-                          const SizedBox(height: 18),
-
-                          /// ═══════════════════════════════════════════
-                          /// TITLE
-                          Text(
-                            'Create your account',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.roboto(
-                              fontSize: 32,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.black,
-                            ),
-                          ),
-
-                          const SizedBox(height: 8),
-
-                          Text(
-                            'Join TapID and simplify your identity verification.',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.roboto(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.textSecondary,
-                            ),
-                          ),
-
-                          const SizedBox(height: 30),
 
                           /// ═══════════════════════════════════════════
                           /// GOOGLE SIGN UP

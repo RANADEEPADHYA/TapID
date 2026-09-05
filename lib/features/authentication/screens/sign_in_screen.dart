@@ -295,7 +295,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             /// ─────────────────────────────────────────
                             /// FOOTER
                             Text(
-                              'Your data is encrypted and secure',
+                              'Your data is encrypted and secure.',
                               style: GoogleFonts.roboto(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
