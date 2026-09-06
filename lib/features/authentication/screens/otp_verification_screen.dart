@@ -1,11 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../theme/app_colors.dart';
 import '../../../widgets/animated_arrow.dart';
-import '../../../widgets/auth_google_button.dart';
+import '../widgets/auth_google_button.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   const OtpVerificationScreen({
@@ -33,33 +31,25 @@ class OtpVerificationScreen extends StatefulWidget {
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
-  // ═══════════════════════════════════════════════════════════════
-  // OTP
-  // ═══════════════════════════════════════════════════════════════
-
+  /// ═══════════════════════════════════════════════════════════════
+  /// OTP
   final TextEditingController _otpController =
   TextEditingController();
-
   final FocusNode _otpFocusNode = FocusNode();
 
-  // ═══════════════════════════════════════════════════════════════
-  // TIMER
-  // ═══════════════════════════════════════════════════════════════
-
+  /// ═══════════════════════════════════════════════════════════════
+  /// TIMER
   Timer? _timer;
 
   int _remainingSeconds = 45;
   int _resendSeconds = 30;
-
   bool _isVerifying = false;
   bool _isResending = false;
 
   @override
   void initState() {
     super.initState();
-
     _otpController.addListener(_onOtpChanged);
-
     _startTimer();
 
     // Automatically focus OTP field after screen opens.
@@ -70,10 +60,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     });
   }
 
-  // ═══════════════════════════════════════════════════════════════
-  // OTP LISTENER
-  // ═══════════════════════════════════════════════════════════════
-
+  /// ═══════════════════════════════════════════════════════════════
+  /// OTP LISTENER
   void _onOtpChanged() {
     setState(() {});
 
@@ -83,13 +71,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     }
   }
 
-  // ═══════════════════════════════════════════════════════════════
-  // TIMER
-  // ═══════════════════════════════════════════════════════════════
-
+  /// ═══════════════════════════════════════════════════════════════
+  /// TIMER
   void _startTimer() {
     _timer?.cancel();
-
     _timer = Timer.periodic(
       const Duration(seconds: 1),
           (timer) {
@@ -211,10 +196,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
-              // ─────────────────────────────────────────────
-              // SCROLL VIEW
-              // Added so keyboard does not cover OTP/buttons.
-              // ─────────────────────────────────────────────
+              /// ─────────────────────────────────────────────
+              /// SCROLL VIEW
+              /// Added so keyboard does not cover OTP/buttons.
+              /// ─────────────────────────────────────────────
               keyboardDismissBehavior:
               ScrollViewKeyboardDismissBehavior.onDrag,
 
@@ -226,23 +211,18 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 constraints: BoxConstraints(
                   minHeight: constraints.maxHeight,
                 ),
-
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,
                   ),
-
                   child: Column(
                     crossAxisAlignment:
                     CrossAxisAlignment.start,
-
                     children: [
                       const SizedBox(height: 14),
 
-                      // ═══════════════════════════════════════
-                      // BACK BUTTON
-                      // ═══════════════════════════════════════
-
+                      /// ═══════════════════════════════════════
+                      /// BACK BUTTON
                       _BackButton(
                         onTap: () {
                           Navigator.of(context).pop();
@@ -251,10 +231,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
                       const SizedBox(height: 34),
 
-                      // ═══════════════════════════════════════
-                      // HEADER
-                      // ═══════════════════════════════════════
-
+                      /// ═══════════════════════════════════════
+                      /// HEADER
                       _Header(
                         phoneNumber: widget.phoneNumber,
                         size: size,
@@ -262,10 +240,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
                       const SizedBox(height: 30),
 
-                      // ═══════════════════════════════════════
-                      // OTP CARD
-                      // ═══════════════════════════════════════
-
+                      /// ═══════════════════════════════════════
+                      /// OTP CARD
                       _OtpCard(
                         controller: _otpController,
                         focusNode: _otpFocusNode,
@@ -385,7 +361,7 @@ class _Header extends StatelessWidget {
                 return Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.purple100,
+                    color: AppColors.purple400,
                   ),
                   child: Icon(
                     Icons.verified_user_rounded,
@@ -514,7 +490,7 @@ class _OtpCard extends StatelessWidget {
           ),
         ],
         border: Border.all(
-          color: AppColors.purple100,
+          color: AppColors.purple400,
           width: 1,
         ),
       ),
@@ -812,7 +788,7 @@ class _OtpInput extends StatelessWidget {
                         border: Border.all(
                           color: active
                               ? AppColors.primaryPurple
-                              : AppColors.purple100,
+                              : AppColors.purple400,
                           width: active ? 1.6 : 1.2,
                         ),
                       ),
@@ -944,9 +920,9 @@ class _OrDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Expanded(
+        Expanded(
           child: Divider(
-            color: AppColors.purple100,
+            color: AppColors.purple400,
             thickness: 1,
           ),
         ),
@@ -965,9 +941,9 @@ class _OrDivider extends StatelessWidget {
           ),
         ),
 
-        const Expanded(
+        Expanded(
           child: Divider(
-            color: AppColors.purple100,
+            color: AppColors.purple400,
             thickness: 1,
           ),
         ),
@@ -995,7 +971,7 @@ class _TroubleCard extends StatelessWidget {
         color: AppColors.purple50,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: AppColors.purple100,
+          color: AppColors.purple400,
         ),
       ),
       child: Row(

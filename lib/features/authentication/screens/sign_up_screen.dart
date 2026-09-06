@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../theme/app_colors.dart';
-import '../../../widgets/app_name.dart';
 import '../widgets/auth_google_button.dart';
 import '../widgets/auth_submit_button.dart';
 import '../widgets/email_input_field.dart';
-import '../widgets/name_input_field.dart';
 import '../widgets/password_input_field.dart';
 import 'sign_in_screen.dart';
 
@@ -375,10 +373,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   child: AuthSubmitButton(
                                     isLoading: _isLoading,
                                     onPressed: _signUp,
-                                    text: 'Sign Up',
+                                    text: 'Sign up',
                                   ),
                                 ),
-
                                 const SizedBox(height: 18),
 
                                 /// ═════════════════════════════════
@@ -387,7 +384,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   mainAxisAlignment:
                                   MainAxisAlignment.center,
                                   children: [
-
                                     Text(
                                       'Already have an account?',
                                       style: GoogleFonts.roboto(
@@ -397,9 +393,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         AppColors.textSecondary,
                                       ),
                                     ),
-
                                     const SizedBox(width: 5),
 
+                                    /// ─────────────────────────────────────────
+                                    /// Sign in button
                                     TextButton(
                                       onPressed: _goToSignIn,
                                       style: TextButton.styleFrom(
@@ -428,7 +425,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ],
                             ),
                           ),
-
                           const SizedBox(height: 24),
 
                           /// ═══════════════════════════════════════════
@@ -451,9 +447,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             ),
                           ),
-
                           const SizedBox(height: 8),
-
                           Text(
                             'Your data is encrypted and secure',
                             style: GoogleFonts.roboto(
@@ -462,7 +456,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               color: AppColors.textSecondary,
                             ),
                           ),
-
                           SizedBox(height: (height * 0.01).clamp(12.0, 24.0).toDouble(),),
                         ],
                       ),

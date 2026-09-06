@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tab_id/features/authentication/screens/forgot_password_screen.dart';
 import '../../../theme/app_colors.dart';
 import '../../../widgets/app_name.dart';
 import '../widgets/auth_google_button.dart';
@@ -52,16 +53,6 @@ class _SignInScreenState extends State<SignInScreen> {
     FocusScope.of(context).unfocus();
 
     // TODO: Add Google authentication here.
-  }
-
-  /// ═══════════════════════════════════════════════════════════════
-  /// GO TO SIGN IN
-  void _goToSignUp() {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (_) => const SignUpScreen(),
-      ),
-    );
   }
 
   @override
@@ -199,7 +190,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                     alignment: Alignment.centerRight,
                                     child: TextButton(
                                       onPressed: () {
-                                        // TODO: Forgot password
+                                        Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                            builder: (_) => const ForgotPasswordScreen(),
+                                          ),
+                                        );
                                       },
                                       style: TextButton.styleFrom(
                                         padding: const EdgeInsets.symmetric(
@@ -223,7 +218,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                                   const SizedBox(height: 16),
 
-                                  /// ─────────────────────────────────────────
+                                  /// ═══════════════════════════════════════════
                                   /// SIGN IN BUTTON
                                   AuthSubmitButton(
                                     isLoading: _isLoading,
@@ -232,7 +227,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   ),
 
 
-                                  /// ─────────────────────────────────────────
+                                  /// ═══════════════════════════════════════════
                                   /// TEXT & TEXT BUTTON
                                   Row(
                                     mainAxisAlignment:
@@ -249,9 +244,16 @@ class _SignInScreenState extends State<SignInScreen> {
 
                                       const SizedBox(width: 5),
 
+                                      /// ─────────────────────────────────────────
                                       /// SIGN UP TEXT BUTTON
                                       TextButton(
-                                        onPressed: _goToSignUp,
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                              builder: (_) => const SignUpScreen(),
+                                            ),
+                                          );
+                                        },
                                         style: TextButton.styleFrom(
                                           padding: const EdgeInsets.symmetric(
                                             horizontal: 3,
@@ -262,7 +264,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                           MaterialTapTargetSize.shrinkWrap,
                                         ),
                                         child: Text(
-                                          'Sign Up',
+                                          'Sign up',
                                           style: GoogleFonts.roboto(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
@@ -276,12 +278,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: (height * 0.01).clamp(20.0, 40.0).toDouble(),
-                            ),
+                            SizedBox(height: (height * 0.01).clamp(20.0, 40.0).toDouble(),),
 
-                            /// ─────────────────────────────────────────
-                            /// LOGO
+                            /// ═══════════════════════════════════════════
+                            /// SECURITY FOOTER
                             Container(
                               width: 58,
                               height: 58,
@@ -300,17 +300,16 @@ class _SignInScreenState extends State<SignInScreen> {
                                 ),
                               ),
                             ),
-
-                            /// ─────────────────────────────────────────
-                            /// FOOTER
+                            const SizedBox(height: 8),
                             Text(
-                              'Your data is encrypted and secure.',
+                              'Your data is encrypted and secure',
                               style: GoogleFonts.roboto(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 color: AppColors.textSecondary,
                               ),
                             ),
+                            SizedBox(height: (height * 0.01).clamp(12.0, 24.0).toDouble(),),
                           ],
                           )
                         )
