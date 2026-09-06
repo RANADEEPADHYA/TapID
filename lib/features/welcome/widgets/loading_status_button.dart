@@ -35,14 +35,14 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
   void initState() {
     super.initState();
 
-    /// ─────────────────────────────────────────
+
     /// Spinner animation
     _spinnerController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
     )..repeat();
 
-    /// ─────────────────────────────────────────
+
     /// Loading duration
     _timer = Timer(widget.duration, () {
       if (!mounted) return;
@@ -84,7 +84,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
     );
   }
 
-  /// ─────────────────────────────────────────
+
   /// LOADING BUTTON
 
   Widget _buildLoadingButton(double width) {
@@ -118,7 +118,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
 
-          /// ─────────────────────────────────────────
+
           /// Animated spinner
           AnimatedBuilder(
             animation: _spinnerController,
@@ -131,7 +131,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
 
           const SizedBox(width: 12),
 
-          /// ─────────────────────────────────────────
+
           /// Loading (Text)
           Text(
             widget.loadingText,
@@ -147,7 +147,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
     );
   }
 
-  /// ─────────────────────────────────────────
+
   /// FINISHED BUTTON
   Widget _buildFinishedButton(double width) {
     return SizedBox(
@@ -201,13 +201,13 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
               alignment: Alignment.center,
               children: [
 
-                /// ─────────────────────────────────────────
+
                 /// Centered check + text
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
 
-                    /// ─────────────────────────────────────────
+
                     /// Icon
                     const Icon(
                       Icons.check_circle_rounded,
@@ -215,7 +215,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
                       size: 32,
                     ),
 
-                    /// ─────────────────────────────────────────
+
                     /// Text
                     Text(
                       widget.finishedText,
@@ -228,7 +228,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
                   ],
                 ),
 
-                /// ─────────────────────────────────────────
+
                 /// Animated right arrow
                 const Positioned(
                   right: 0,

@@ -20,7 +20,7 @@ class WelcomeText extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
 
-        /// ─────────────────────────────────────────────
+
         /// APP LOGO
         Image.asset(
           'assets/images/TabID_round.png',
@@ -34,7 +34,7 @@ class WelcomeText extends StatelessWidget {
         ),
 
 
-        /// ─────────────────────────────────────────
+
         /// App Name (TapID)
         const AppName(
           fontSize: 48,
@@ -47,7 +47,7 @@ class WelcomeText extends StatelessWidget {
         ),
 
 
-        /// ─────────────────────────────────────────────
+
         /// Subtitle
         Text(
           'Tap. Share. Connect.',
@@ -59,13 +59,13 @@ class WelcomeText extends StatelessWidget {
           ),
         ),
 
-        /// ─────────────────────────────────────────────
+
         /// Space
         SizedBox(
           height: (height * 0.01).clamp(20.0, 40.0).toDouble(),
         ),
 
-        /// ─────────────────────────────────────────────
+
         /// Gradient Divider
         Container(
           width: 60,

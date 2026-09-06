@@ -190,7 +190,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                     alignment: Alignment.centerRight,
                                     child: TextButton(
                                       onPressed: () {
-                                        Navigator.of(context).pushReplacement(
+                                        Navigator.of(context).push(
                                           MaterialPageRoute(
                                             builder: (_) => const ForgotPasswordScreen(),
                                           ),

@@ -28,15 +28,15 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen>
     with TickerProviderStateMixin {
 
-  /// ═══════════════════════════════════════════════════════════
+
   /// WELCOME CONTROLLER
   late final WelcomeController _controller;
 
-  /// ═══════════════════════════════════════════════════════════
+
   /// ENTRANCE ANIMATION CONTROLLER
   late final AnimationController _entranceController;
 
-  /// ═══════════════════════════════════════════════════════════
+
   /// STARTUP STEPS
   final List<StartupStep> _steps = const [
     StartupStep(
@@ -65,7 +65,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   void initState() {
     super.initState();
 
-    /// ═══════════════════════════════════════════════════════════
+
     /// WELCOME CONTROLLER
     _controller = WelcomeController(
       initializeApp: widget.initializeApp,
@@ -73,7 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       onFinished: widget.onFinished,
     )..addListener(_onControllerChanged);
 
-    /// ═══════════════════════════════════════════════════════════
+
     /// ENTRANCE ANIMATION
     _entranceController = AnimationController(
       vsync: this,
@@ -89,7 +89,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     _controller.start();
   }
 
-  /// ═══════════════════════════════════════════════════════════
+
   /// CONTROLLER UPDATE
   void _onControllerChanged() {
     if (!mounted) return;
@@ -106,7 +106,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     super.dispose();
   }
 
-  /// ═══════════════════════════════════════════════════════════
+
   /// GO TO ONBOARDING
   void _goToOnboarding(BuildContext context) {
     Navigator.pushReplacement(
@@ -117,7 +117,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     );
   }
 
-  /// ═══════════════════════════════════════════════════════════
+
   /// BOTTOM → TOP ITEM ANIMATION
   Widget _buildEntranceAnimation({
     required Widget child,
@@ -153,7 +153,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     );
   }
 
-  /// ═══════════════════════════════════════════════════════════
+
   /// BUILD
   @override
   Widget build(BuildContext context) {
@@ -165,11 +165,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           final double width = constraints.maxWidth;
           final double height = constraints.maxHeight;
 
-          /// ═══════════════════════════════════════════════════
+
           /// RESPONSIVE DEVICE TYPE
           final bool isWide = width >= 700;
 
-          /// ═══════════════════════════════════════════════════
+
           /// CONTENT WIDTH
           final double contentWidth = isWide
               ? math.min(width * 0.62, 560)
@@ -191,7 +191,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     mainAxisSize: MainAxisSize.max,
                     children: [
 
-                      /// ═══════════════════════════════════════
+
                       /// WELCOME TEXT
                       _buildEntranceAnimation(
                         begin: 0.00,
@@ -202,11 +202,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         ),
                       ),
 
-                      /// ═══════════════════════════════════════
+
                       /// SPACING
                       SizedBox(height: (height * 0.03).clamp(20.0, 40.0).toDouble(),),
 
-                      /// ═══════════════════════════════════════
+
                       /// STARTUP STATUS
                       _buildEntranceAnimation(
                         begin: 0.15,
@@ -219,11 +219,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         ),
                       ),
 
-                      /// ═══════════════════════════════════════
+
                       /// SPACING
                       SizedBox(height: (height * 0.06).toDouble(),),
 
-                      /// ═══════════════════════════════════════
+
                       /// PROGRESS
                       _buildEntranceAnimation(
                         begin: 0.35,
@@ -234,11 +234,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         ),
                       ),
 
-                      /// ═══════════════════════════════════════
+
                       /// SPACING
                       SizedBox(height: (height * 0.01).clamp(12.0, 24.0).toDouble(),),
 
-                      /// ═══════════════════════════════════════
+
                       /// LOADING BUTTON
                       _buildEntranceAnimation(
                         begin: 0.55,

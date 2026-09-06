@@ -76,7 +76,7 @@ class _StatusItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
 
-          /// ─────────────────────────────────────────
+
           /// Status Icon Circle
           Container(
             width: compact ? 38 : 44,
@@ -129,13 +129,13 @@ class _StatusItem extends StatelessWidget {
             ),
           ),
 
-          /// ─────────────────────────────────────────
+
           /// Responsive spacing
           SizedBox(
             height: (height * 0.01).clamp(10.0, 20.0).toDouble(),
           ),
 
-          /// ─────────────────────────────────────────
+
           /// Title
           Text(
             step.title,

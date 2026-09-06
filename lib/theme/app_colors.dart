@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  /// ═══════════════════════════════════════════════════════════
+
   /// BASIC
   static const Color transparent = Colors.transparent;
   static const Color white = Color(0xFFFFFFFF);

@@ -411,15 +411,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       child: Image.asset(
         'assets/images/illustrations/forgot_password.png',
         fit: BoxFit.contain,
-
-        // If you don't have the illustration yet,
-        // temporarily comment Image.asset and use:
-        //
-        // const Icon(
-        //   Icons.lock_open_rounded,
-        //   size: 90,
-        //   color: AppColors.primaryPurple,
-        // ),
       ),
     );
   }
