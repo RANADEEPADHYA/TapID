@@ -138,6 +138,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                     ),
 
                     const SizedBox(height: 20),
+
                     /// TITLE
                     Text(
                       'Enter your number',

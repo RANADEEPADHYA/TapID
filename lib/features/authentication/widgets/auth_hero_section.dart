@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tab_id/widgets/app_name.dart';
 
 import '../../../theme/app_colors.dart';
@@ -54,16 +55,16 @@ class AuthHeroSection extends StatelessWidget {
           /// TAGLINE
           Positioned(
             left: 30,
-            top:120,
+            top:115,
             child: SizedBox(
               width: size.width * 0.52,
-              child: const Text(
+              child: Text(
                 'One identity for a simpler,\n'
                     'safer digital you.',
-                style: TextStyle(
+                style: GoogleFonts.roboto(
                   color: AppColors.white,
-                  fontSize: 19,
-                  fontWeight: FontWeight.w400,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
                   height: 1.4,
                 ),
               ),
@@ -73,7 +74,7 @@ class AuthHeroSection extends StatelessWidget {
           /// FEATURE LIST
           Positioned(
             left: 30,
-            top:200,
+            top: 185,
             child: const _HeroFeatures(),
           ),
         ],
@@ -153,7 +154,7 @@ class _HeroFeature extends StatelessWidget {
 
         Text(
           title,
-          style: const TextStyle(
+          style: GoogleFonts.roboto(
             color: AppColors.white,
             fontSize: 18,
             fontWeight: FontWeight.w500,
