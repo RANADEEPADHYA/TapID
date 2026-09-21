@@ -111,16 +111,26 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
     ),
   ];
 
-  /// ═══════════════════════════════════════════════════════════
   /// SELECTED COUNTRY
   late Country _selectedCountry;
 
   @override
   void initState() {
     super.initState();
-
-    /// Default country
     _selectedCountry = _countries.first;
+    widget.focusNode.addListener(_onFocusChanged);
+  }
+
+  void _onFocusChanged() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.focusNode.removeListener(_onFocusChanged);
+    super.dispose();
   }
 
   /// COUNTRY PICKER
@@ -153,8 +163,10 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
     widget.focusNode.requestFocus();
   }
 
+
   @override
   Widget build(BuildContext context) {
+    final bool isFocused = widget.focusNode.hasFocus;
     return Container(
       width: double.infinity,
       height: 65,
@@ -163,8 +175,12 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
         color: AppColors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: AppColors.primaryPurple1,
-          width: 2,
+          color: isFocused
+              ? AppColors.primaryPurple1
+              : AppColors.textTertiary.withValues(
+            alpha: 0.35,
+          ),
+          width: isFocused ? 2 : 1.5,
         ),
       ),
 
