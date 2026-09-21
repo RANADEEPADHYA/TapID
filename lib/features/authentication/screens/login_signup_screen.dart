@@ -79,16 +79,12 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
-
     return Scaffold(
       backgroundColor: AppColors.white,
-
       resizeToAvoidBottomInset: true,
-
       body: Stack(
         children: [
 
-          /// ═══════════════════════════════════════════════════
           /// HERO / TOP SECTION
           Positioned(
             top: 0,
@@ -98,17 +94,6 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
             child: const AuthHeroSection(),
           ),
 
-          /// ═══════════════════════════════════════════════════
-          /// TOP RIGHT SKIP
-          Positioned(
-            top: MediaQuery.paddingOf(context).top + 18,
-            right: 20,
-            child: _SkipButton(
-              onTap: _skip,
-            ),
-          ),
-
-          /// ═══════════════════════════════════════════════════
           /// AUTHENTICATION PANEL
           Positioned(
             left: 0,
@@ -123,7 +108,6 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                   topRight: Radius.circular(38),
                 ),
               ),
-
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
 
@@ -136,12 +120,10 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                 ),
 
                 child: Column(
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
 
                   children: [
 
-                    /// ═══════════════════════════════════════
                     /// DRAG INDICATOR
                     Center(
                       child: Container(
@@ -155,62 +137,49 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                       ),
                     ),
 
-                    const SizedBox(height: 68),
-
-                    /// ═══════════════════════════════════════
+                    const SizedBox(height: 20),
                     /// TITLE
                     Text(
                       'Enter your number',
                       style: GoogleFonts.roboto(
                         color: AppColors.darkBlue950,
-                        fontSize: 38,
-                        fontWeight: FontWeight.w800,
-                        height: 1.1,
+                        fontSize: 32,
+                        fontWeight: FontWeight.w900,
                       ),
                     ),
 
-                    const SizedBox(height: 14),
-
-                    /// ═══════════════════════════════════════
                     /// DESCRIPTION
                     Text(
                       'We\'ll send you a verification code\n'
                           'to get started.',
                       style: GoogleFonts.roboto(
                         color: AppColors.textSecondary,
-                        fontSize: 21,
+                        fontSize: 18,
                         fontWeight: FontWeight.w400,
-                        height: 1.35,
                       ),
                     ),
 
-                    const SizedBox(height: 42),
+                    const SizedBox(height: 20),
 
-                    /// ═══════════════════════════════════════
                     /// PHONE NUMBER
                     PhoneNumberField(
                       controller: _phoneController,
                       focusNode: _phoneFocusNode,
                     ),
 
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 10),
 
-                    /// ═══════════════════════════════════════
                     /// SECURITY INFORMATION
                     const SecurityInfoCard(),
 
-                    const SizedBox(height: 74),
-
-                    /// ═══════════════════════════════════════
                     /// CONTINUE
                     AuthContinueButton(
                       enabled: _isPhoneValid,
                       onTap: _continue,
                     ),
 
-                    const SizedBox(height: 38),
+                    const SizedBox(height: 10),
 
-                    /// ═══════════════════════════════════════
                     /// TERMS
                     Center(
                       child: _TermsText(
@@ -230,46 +199,6 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
   }
 }
 
-/// ═══════════════════════════════════════════════════════════
-/// SKIP BUTTON
-class _SkipButton extends StatelessWidget {
-  const _SkipButton({
-    required this.onTap,
-  });
-
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.white.withValues(alpha: 0.65),
-      borderRadius: BorderRadius.circular(40),
-
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(40),
-
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 30,
-            vertical: 15,
-          ),
-
-          child: Text(
-            'Skip',
-            style: GoogleFonts.roboto(
-              color: AppColors.darkBlue950,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// ═══════════════════════════════════════════════════════════
 /// TERMS TEXT
 class _TermsText extends StatelessWidget {
   const _TermsText({
@@ -286,16 +215,15 @@ class _TermsText extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextStyle normalStyle = GoogleFonts.roboto(
       color: AppColors.textSecondary,
-      fontSize: 17,
+      fontSize: 16,
       fontWeight: FontWeight.w400,
-      height: 1.5,
     );
 
     final TextStyle linkStyle = normalStyle.copyWith(
       color: AppColors.primaryPurple1,
       decoration: TextDecoration.underline,
       decorationColor: AppColors.primaryPurple1,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w800,
     );
 
     return Wrap(
@@ -303,7 +231,7 @@ class _TermsText extends StatelessWidget {
       children: [
 
         Text(
-          'By continuing, I agree to the ',
+          'By continuing, I agree to the  ',
           style: normalStyle,
         ),
 
@@ -329,7 +257,7 @@ class _TermsText extends StatelessWidget {
         ),
 
         Text(
-          '\nand ',
+          '  and  ',
           style: normalStyle,
         ),
 
