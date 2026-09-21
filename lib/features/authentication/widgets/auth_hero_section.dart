@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tab_id/widgets/app_name.dart';
 
 import '../../../theme/app_colors.dart';
 
@@ -13,86 +14,24 @@ class AuthHeroSection extends StatelessWidget {
 
     return ClipRect(
       child: Stack(
+        fit: StackFit.expand,
         children: [
 
-          /// ═══════════════════════════════════════════════════
-          /// BASE GRADIENT
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  AppColors.primaryBlue,
-                  AppColors.primaryPurple,
-                  AppColors.darkBlue900,
-                ],
-                stops: [
-                  0.0,
-                  0.30,
-                  0.68,
-                  1.0,
-                ],
-              ),
+          /// BACKGROUND IMAGE
+          AspectRatio(
+            aspectRatio: 1024 / 588,
+            child: Image.asset(
+              'assets/images/authentication/hero_section_log_in.png',
+              width: double.infinity,
+              fit: BoxFit.cover,
             ),
           ),
 
-          /// ═══════════════════════════════════════════════════
-          /// LIGHT GLOW — TOP LEFT
-          Positioned(
-            left: -size.width * 0.35,
-            top: -size.width * 0.35,
-            child: Container(
-              width: size.width * 0.80,
-              height: size.width * 0.80,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColors.purple400.withValues(
-                  alpha: 0.55,
-                ),
-              ),
-            ),
-          ),
 
-          /// ═══════════════════════════════════════════════════
-          /// BLUE GLOW
-          Positioned(
-            right: -size.width * 0.25,
-            top: size.height * 0.10,
-            child: Container(
-              width: size.width * 0.75,
-              height: size.width * 0.75,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColors.skyBlue.withValues(
-                  alpha: 0.28,
-                ),
-              ),
-            ),
-          ),
-
-          /// ═══════════════════════════════════════════════════
-          /// BOTTOM LIGHT AREA
-          Positioned(
-            left: -size.width * 0.15,
-            bottom: -size.width * 0.65,
-            child: Container(
-              width: size.width * 1.25,
-              height: size.width * 1.25,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColors.white.withValues(
-                  alpha: 0.35,
-                ),
-              ),
-            ),
-          ),
-
-          /// ═══════════════════════════════════════════════════
           /// TAPID LOGO
           Positioned(
-            right: size.width * 0.13,
-            top: size.height * 0.135,
+            right: 10,
+            top: 70,
             child: Image.asset(
               'assets/images/TabID_round.png',
               width: size.width * 0.34,
@@ -101,54 +40,21 @@ class AuthHeroSection extends StatelessWidget {
             ),
           ),
 
-          /// ═══════════════════════════════════════════════════
           /// TAPID TEXT
           Positioned(
-            left: size.width * 0.08,
-            top: size.height * 0.145,
-            child: RichText(
-              text: const TextSpan(
-                children: [
-
-                  TextSpan(
-                    text: 'Tap',
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 52,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: -2,
-                    ),
-                  ),
-
-                  TextSpan(
-                    text: 'I',
-                    style: TextStyle(
-                      color: AppColors.brandPink,
-                      fontSize: 52,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: -2,
-                    ),
-                  ),
-
-                  TextSpan(
-                    text: 'D',
-                    style: TextStyle(
-                      color: AppColors.primaryBlue,
-                      fontSize: 52,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: -2,
-                    ),
-                  ),
-                ],
-              ),
+            left: 30,
+            top:50,
+            child: const AppName(
+              fontSize: 50,
+              fontWeight: FontWeight.w900,
+              splitColor: true,
             ),
           ),
 
-          /// ═══════════════════════════════════════════════════
           /// TAGLINE
           Positioned(
-            left: size.width * 0.085,
-            top: size.height * 0.255,
+            left: 30,
+            top:120,
             child: SizedBox(
               width: size.width * 0.52,
               child: const Text(
@@ -164,11 +70,10 @@ class AuthHeroSection extends StatelessWidget {
             ),
           ),
 
-          /// ═══════════════════════════════════════════════════
           /// FEATURE LIST
           Positioned(
-            left: size.width * 0.085,
-            bottom: size.height * 0.065,
+            left: 30,
+            top:200,
             child: const _HeroFeatures(),
           ),
         ],
@@ -191,14 +96,14 @@ class _HeroFeatures extends StatelessWidget {
           title: 'Secure',
         ),
 
-        SizedBox(height: 13),
+        SizedBox(height: 8),
 
         _HeroFeature(
           icon: Icons.bolt_rounded,
           title: 'Fast',
         ),
 
-        SizedBox(height: 13),
+        SizedBox(height: 8),
 
         _HeroFeature(
           icon: Icons.people_outline_rounded,
@@ -224,8 +129,8 @@ class _HeroFeature extends StatelessWidget {
       children: [
 
         Container(
-          width: 43,
-          height: 43,
+          width: 35,
+          height:35,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: AppColors.white.withValues(
@@ -240,11 +145,11 @@ class _HeroFeature extends StatelessWidget {
           child: Icon(
             icon,
             color: AppColors.white,
-            size: 24,
+            size: 22,
           ),
         ),
 
-        const SizedBox(width: 16),
+        const SizedBox(width: 10),
 
         Text(
           title,
