@@ -154,7 +154,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                     /// SECURITY INFORMATION
                     const SecurityInfoCard(),
 
-                    const SizedBox(height: 40),
+                    const SizedBox(height:100),
 
                     /// CONTINUE
                     AuthContinueButton(

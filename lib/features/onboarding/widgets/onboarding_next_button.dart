@@ -57,7 +57,6 @@ class OnboardingNextButton extends StatelessWidget {
               right: 0,
               child: AnimatedArrow(
                 size: 40,
-                color: AppColors.white,
               ),
             ),
           ],

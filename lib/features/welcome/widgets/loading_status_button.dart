@@ -234,7 +234,6 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
                   right: 0,
                   child: AnimatedArrow(
                     size: 40,
-                    color: AppColors.white,
                   ),
                 ),
               ],

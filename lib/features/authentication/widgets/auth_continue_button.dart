@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../theme/app_colors.dart';
+import '../../../widgets/animated_arrow.dart';
 
 class AuthContinueButton extends StatelessWidget {
   const AuthContinueButton({
@@ -24,7 +25,10 @@ class AuthContinueButton extends StatelessWidget {
         ),
 
         width: double.infinity,
-        height: 82,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 18,
+          vertical: 12,
+        ),
 
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(22),
@@ -50,7 +54,6 @@ class AuthContinueButton extends StatelessWidget {
 
           children: [
 
-            /// ═══════════════════════════════════════════
             /// TEXT
             Text(
               'Continue',
@@ -58,37 +61,21 @@ class AuthContinueButton extends StatelessWidget {
                 color: enabled
                     ? AppColors.white
                     : AppColors.textSecondary,
-                fontSize: 25,
+                fontSize: 32,
                 fontWeight: FontWeight.w700,
               ),
             ),
 
-            /// ═══════════════════════════════════════════
-            /// ARROW CIRCLE
-            Positioned(
-              right: 8,
-              child: Container(
-                width: 66,
-                height: 66,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: enabled
-                      ? AppColors.white.withValues(
-                    alpha: 0.18,
-                  )
-                      : AppColors.white.withValues(
-                    alpha: 0.65,
-                  ),
-                ),
-                child: Icon(
-                  Icons.chevron_right_rounded,
-                  size: 42,
+            /// Animated right arrow
+              Positioned(
+                right: 0,
+                child: AnimatedArrow(
+                  size: 40,
                   color: enabled
                       ? AppColors.white
                       : AppColors.textSecondary,
                 ),
               ),
-            ),
           ],
         ),
       ),
