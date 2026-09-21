@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tab_id/features/authentication/screens/sign_in_screen.dart';
-import 'package:tab_id/features/authentication/screens/sign_up_screen.dart';
-
+import 'package:tab_id/features/authentication/screens/login_signup_screen.dart';
 import '../controllers/onboarding_controller.dart';
 import '../widgets/onboarding_next_button.dart';
 import '../widgets/onboarding_auth_buttons.dart';
 import '../widgets/onboarding_page_indicator.dart';
 import '../widgets/onboarding_skip_button.dart';
-
 import 'onboarding_1_one_tap_screen.dart';
 import 'onboarding_2_nfc_screen.dart';
 import 'onboarding_3_privacy_screen.dart';
@@ -54,22 +51,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void _goToSignIn() {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (_) => const SignInScreen(),
+        builder: (_) => const LoginSignupScreen(),
       ),
           (route) => false,
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════
-  // GO TO SIGN UP
-  void _goToSignUp() {
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(
-        builder: (_) => const SignUpScreen(),
-      ),
-          (route) => false,
-    );
-  }
+
 
   // ═══════════════════════════════════════════════════════════════
   // NEXT
@@ -153,7 +141,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: isLastPage
                     ? OnboardingAuthButtons(
                   onSignIn: _goToSignIn,
-                  onSignUp: _goToSignUp,
                 )
                     : OnboardingNextButton(
                   label: 'Next',

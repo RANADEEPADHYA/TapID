@@ -6,18 +6,13 @@ class OnboardingAuthButtons extends StatelessWidget {
   const OnboardingAuthButtons({
     super.key,
     required this.onSignIn,
-    required this.onSignUp,
   });
   final VoidCallback onSignIn;
-  final VoidCallback onSignUp;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        /// ═══════════════════════════════════════════════════════
-        /// SIGN IN — PRIMARY BUTTON
-
         Expanded(
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
@@ -61,47 +56,6 @@ class OnboardingAuthButtons extends StatelessWidget {
                     ),
                   ),
 
-                ],
-              ),
-            ),
-          ),
-        ),
-
-        const SizedBox(width: 14),
-
-        /// ═══════════════════════════════════════════════════════
-        /// SIGN UP — SECONDARY BUTTON
-
-        Expanded(
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: onSignUp,
-            child: Container(
-              height: 72,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 14,
-              ),
-              decoration: BoxDecoration(
-                color: AppColors.white.withValues(alpha: .55),
-                borderRadius: BorderRadius.circular(36),
-                border: Border.all(
-                  color: AppColors.primaryPurple,
-                  width: 1.5,
-                ),
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Center(
-                    child: Text(
-                      'Sign Up',
-                      style: GoogleFonts.roboto(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w800,
-                        color: AppColors.primaryPurple,
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
