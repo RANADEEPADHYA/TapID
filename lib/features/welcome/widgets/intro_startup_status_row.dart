@@ -151,7 +151,6 @@ class _StatusItem extends StatelessWidget {
             ),
           ),
 
-          /// ─────────────────────────────────────────
           /// Subtitle
           Text(
             step.subtitle,

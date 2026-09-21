@@ -84,9 +84,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
     );
   }
 
-
   /// LOADING BUTTON
-
   Widget _buildLoadingButton(double width) {
     return Container(
       key: const ValueKey('loading'),
@@ -102,7 +100,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         border: Border.all(
-          color: AppColors.primaryBlue.withValues(alpha: 0.45,),
+          color: AppColors.primaryPurple.withValues(alpha: 0.45,),
           width: 1,
         ),
 
@@ -179,13 +177,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
                 width: 1,
               ),
 
-              gradient: const LinearGradient(
-                colors: [
-                  AppColors.primaryBlue,
-                  AppColors.primaryBlue,
-                ],
-              ),
-
+              gradient: AppColors.buttonGradient,
               boxShadow: [
                 BoxShadow(
                   color: AppColors.primaryBlue.withValues(
@@ -196,7 +188,6 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
                 ),
               ],
             ),
-
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -221,7 +212,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
                       widget.finishedText,
                       style: GoogleFonts.roboto(
                         color: AppColors.white,
-                        fontSize: 28,
+                        fontSize: 32,
                         fontWeight: FontWeight.w800,
                       ),
                     ),

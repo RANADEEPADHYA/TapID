@@ -11,42 +11,52 @@ class AppName extends StatelessWidget {
     this.color = AppColors.white,
     this.splitColor = false,
     this.tapColor = AppColors.white,
-    this.idColor = AppColors.primaryBlue,
   });
+
   final double fontSize;
   final FontWeight fontWeight;
   final Color color;
   final bool splitColor;
   final Color tapColor;
-  final Color idColor;
 
   @override
   Widget build(BuildContext context) {
     final textStyle = GoogleFonts.lobsterTwo(
       fontSize: fontSize,
       fontWeight: fontWeight,
+      fontStyle: FontStyle.italic,
     );
 
     if (splitColor) {
-      return RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-              text: 'Tap',
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Tap',
+            style: textStyle.copyWith(
+              color: tapColor,
+            ),
+          ),
+
+          ShaderMask(
+            shaderCallback: (bounds) {
+              return AppColors.appNameGradient.createShader(
+                Rect.fromLTWH(
+                  0,
+                  0,
+                  bounds.width,
+                  bounds.height,
+                ),
+              );
+            },
+            child: Text(
+              'ID',
               style: textStyle.copyWith(
-                color: tapColor,
-                fontStyle: FontStyle.italic
+                color: Colors.white,
               ),
             ),
-            TextSpan(
-              text: 'ID',
-              style: textStyle.copyWith(
-                color: idColor,
-                  fontStyle: FontStyle.italic
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       );
     }
 
