@@ -205,11 +205,11 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
                   Text(
                     _selectedCountry.flag,
                     style: const TextStyle(
-                      fontSize: 25,
+                      fontSize: 24,
                     ),
                   ),
 
-                  const SizedBox(width: 7),
+                  const SizedBox(width: 5),
 
                   /// COUNTRY CODE
                   Text(
@@ -234,8 +234,11 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
 
           /// DIVIDER
           Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 5,
+            margin: const EdgeInsets.fromLTRB(
+              0, // left
+              0, // top
+              5, // right
+              0, // bottom
             ),
             width: 1.5,
             height: 42,
