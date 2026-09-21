@@ -60,10 +60,6 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
     // Send OTP here.
   }
 
-  void _skip() {
-    Navigator.of(context).pop();
-  }
-
   void _openPrivacyPolicy() {
     debugPrint('Privacy Policy');
   }
@@ -112,9 +108,9 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                 physics: const BouncingScrollPhysics(),
 
                 padding: EdgeInsets.only(
-                  left: 44,
-                  right: 44,
-                  top: 34,
+                  left: 40,
+                  right: 40,
+                  top: 40,
                   bottom:
                   MediaQuery.paddingOf(context).bottom + 24,
                 ),
@@ -123,21 +119,6 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
 
                   children: [
-
-                    /// DRAG INDICATOR
-                    Center(
-                      child: Container(
-                        width: 76,
-                        height: 7,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFD6D9E2),
-                          borderRadius:
-                          BorderRadius.circular(20),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 20),
 
                     /// TITLE
                     Text(
@@ -151,8 +132,8 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
 
                     /// DESCRIPTION
                     Text(
-                      'We\'ll send you a verification code\n'
-                          'to get started.',
+                      'We\'ll send you a verification code to get\n'
+                          'started.',
                       style: GoogleFonts.roboto(
                         color: AppColors.textSecondary,
                         fontSize: 18,
@@ -172,6 +153,8 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
 
                     /// SECURITY INFORMATION
                     const SecurityInfoCard(),
+
+                    const SizedBox(height: 40),
 
                     /// CONTINUE
                     AuthContinueButton(
