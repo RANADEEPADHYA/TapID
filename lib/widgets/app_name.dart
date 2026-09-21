@@ -11,7 +11,7 @@ class AppName extends StatelessWidget {
     this.color = AppColors.white,
     this.splitColor = false,
     this.tapColor = AppColors.white,
-    this.idColor = AppColors.primaryPurple,
+    this.idColor = AppColors.primaryBlue,
   });
   final double fontSize;
   final FontWeight fontWeight;

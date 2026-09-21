@@ -23,18 +23,18 @@ class OnboardingAuthButtons extends StatelessWidget {
                 horizontal: 14,
               ),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
+                gradient: LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                   colors: [
-                    AppColors.primaryPurple,
-                    AppColors.skyBlue,
+                    AppColors.primaryBlue,
+                    AppColors.skyBlue100,
                   ],
                 ),
                 borderRadius: BorderRadius.circular(36),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primaryPurple.withValues(
+                    color: AppColors.primaryBlue.withValues(
                       alpha: .22,
                     ),
                     blurRadius: 16,

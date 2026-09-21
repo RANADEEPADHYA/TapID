@@ -29,13 +29,13 @@ class SecurityInfoCard extends StatelessWidget {
             height: 55,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.primaryPurple.withValues(
+              color: AppColors.primaryBlue.withValues(
                 alpha: 0.10,
               ),
             ),
             child: const Icon(
               Icons.lock_outline_rounded,
-              color: AppColors.primaryPurple1,
+              color: AppColors.primaryBlue,
               size: 35,
             ),
           ),

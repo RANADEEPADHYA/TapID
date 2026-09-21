@@ -176,7 +176,7 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: isFocused
-              ? AppColors.primaryPurple1
+              ? AppColors.primaryBlue
               : AppColors.textTertiary.withValues(
             alpha: 0.35,
           ),
@@ -409,7 +409,7 @@ class _CountryPickerSheetState
 
                 prefixIcon: const Icon(
                   Icons.search_rounded,
-                  color: AppColors.primaryPurple,
+                  color: AppColors.primaryBlue,
                 ),
 
                 filled: true,
@@ -494,7 +494,7 @@ class _CountryPickerSheetState
                         if (isSelected)
                           const Icon(
                             Icons.check_circle_rounded,
-                            color: AppColors.primaryPurple,
+                            color: AppColors.primaryBlue,
                             size: 22,
                           ),
                       ],

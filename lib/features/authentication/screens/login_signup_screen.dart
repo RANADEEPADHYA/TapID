@@ -204,9 +204,9 @@ class _TermsText extends StatelessWidget {
     );
 
     final TextStyle linkStyle = normalStyle.copyWith(
-      color: AppColors.primaryPurple1,
+      color: AppColors.primaryBlue,
       decoration: TextDecoration.underline,
-      decorationColor: AppColors.primaryPurple1,
+      decorationColor: AppColors.primaryBlue,
       fontWeight: FontWeight.w800,
     );
 

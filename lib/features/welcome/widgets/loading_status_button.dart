@@ -102,13 +102,13 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         border: Border.all(
-          color: AppColors.primaryPurple1.withValues(alpha: 0.45,),
+          color: AppColors.primaryBlue.withValues(alpha: 0.45,),
           width: 1,
         ),
 
         gradient: LinearGradient(
           colors: [
-            AppColors.primaryPurple1.withValues(alpha: 0.12,),
+            AppColors.primaryBlue.withValues(alpha: 0.12,),
             AppColors.brandPink.withValues(alpha: 0.08,),
           ],
         ),
@@ -181,14 +181,14 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
 
               gradient: const LinearGradient(
                 colors: [
-                  AppColors.primaryPurple1,
+                  AppColors.primaryBlue,
                   AppColors.primaryBlue,
                 ],
               ),
 
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primaryPurple1.withValues(
+                  color: AppColors.primaryBlue.withValues(
                     alpha: 0.35,
                   ),
                   blurRadius: 18,

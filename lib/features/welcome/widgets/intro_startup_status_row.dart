@@ -88,7 +88,7 @@ class _StatusItem extends StatelessWidget {
                   : AppColors.iconCircleDarkFull.withValues(alpha: 0.5),
               border: Border.all(
                 color: active
-                    ? AppColors.primaryPurple1.withValues(alpha: 0.6)
+                    ? AppColors.primaryPurple.withValues(alpha: 0.6)
                     : AppColors.iconCircleDarkBorder,
                 width: 1.5,
               ),
@@ -102,7 +102,7 @@ class _StatusItem extends StatelessWidget {
                     end: Alignment.bottomRight,
                     colors: [
                       AppColors.brandPink,
-                      AppColors.primaryPurple1,
+                      AppColors.primaryPurple,
                       AppColors.primaryBlue,
                     ],
                   ).createShader(

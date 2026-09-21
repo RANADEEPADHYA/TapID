@@ -38,7 +38,7 @@ class AuthContinueButton extends StatelessWidget {
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             colors: [
-              AppColors.primaryPurple1,
+              AppColors.primaryBlue,
               AppColors.primaryBlue,
             ],
           )

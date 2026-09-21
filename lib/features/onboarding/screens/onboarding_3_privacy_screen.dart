@@ -156,7 +156,7 @@ class _OnboardingHeader extends StatelessWidget {
           style: GoogleFonts.lobsterTwo(
             fontSize: 45,
             fontWeight: FontWeight.w900,
-            color: AppColors.primaryPurple,
+            color: AppColors.primaryBlue,
           ),
         ),
       ],

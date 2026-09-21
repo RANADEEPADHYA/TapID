@@ -29,7 +29,7 @@ class OnboardingNextButton extends StatelessWidget {
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             colors: [
-              AppColors.primaryPurple,
+              AppColors.primaryBlue,
               AppColors.nextButtonPurple,
             ],
           ),
