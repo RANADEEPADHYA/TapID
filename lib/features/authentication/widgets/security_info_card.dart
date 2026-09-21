@@ -14,7 +14,7 @@ class SecurityInfoCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(
         horizontal: 24,
-        vertical: 20,
+        vertical: 14,
       ),
       decoration: BoxDecoration(
         color: AppColors.purple50,
@@ -23,11 +23,10 @@ class SecurityInfoCard extends StatelessWidget {
       child: Row(
         children: [
 
-          /// ═══════════════════════════════════════════════
           /// LOCK ICON
           Container(
-            width: 62,
-            height: 62,
+            width: 55,
+            height: 55,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: AppColors.primaryPurple.withValues(
@@ -37,13 +36,12 @@ class SecurityInfoCard extends StatelessWidget {
             child: const Icon(
               Icons.lock_outline_rounded,
               color: AppColors.primaryPurple1,
-              size: 32,
+              size: 35,
             ),
           ),
 
-          const SizedBox(width: 20),
+          const SizedBox(width: 10),
 
-          /// ═══════════════════════════════════════════════
           /// TEXT
           Expanded(
             child: Column(
@@ -55,18 +53,18 @@ class SecurityInfoCard extends StatelessWidget {
                   'Your number is safe with us.',
                   style: GoogleFonts.roboto(
                     color: AppColors.darkBlue950,
-                    fontSize: 18,
+                    fontSize: 17,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
 
-                const SizedBox(height: 6),
+                const SizedBox(height: 3),
 
                 Text(
                   'We use it only for verification.',
                   style: GoogleFonts.roboto(
                     color: AppColors.textSecondary,
-                    fontSize: 17,
+                    fontSize: 15,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
