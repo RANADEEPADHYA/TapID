@@ -90,7 +90,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
             top: 0,
             left: 0,
             right: 0,
-            height: size.height * 0.46,
+            height: size.height * 0.40,
             child: const AuthHeroSection(),
           ),
 
@@ -98,7 +98,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
           Positioned(
             left: 0,
             right: 0,
-            top: size.height * 0.40,
+            top: size.height * 0.36,
             bottom: 0,
             child: Container(
               decoration: const BoxDecoration(
