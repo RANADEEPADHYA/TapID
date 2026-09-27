@@ -16,7 +16,7 @@ class OtpVerificationScreen extends StatefulWidget {
 
   final String phoneNumber;
   /// Called when the user submits a complete 6-digit OTP.
-  final ValueChanged<String> onVerify;
+  final Future<bool> Function(String otp) onVerify;
   /// Called when the user wants to change their phone number.
   final VoidCallback onChangePhone;
   /// Called when the user requests another OTP.
@@ -36,7 +36,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   Timer? _timer;
   int _remainingSeconds = _initialCountdown;
-  final bool _isVerifying = false;
+  bool _isVerifying = false;
   String get _otp => _controllers.map((controller) => controller.text).join();
   bool get _isOtpComplete => _otp.length == _otpLength;
 
@@ -159,12 +159,60 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 
   /// VERIFY OTP
-  void verifyOtp() {
-    if (!_isOtpComplete || _isVerifying) {
-      return;
+  Future<void> verifyOtp() async {
+    if (!_isOtpComplete || _isVerifying) return;
+
+    setState(() {
+      _isVerifying = true;
+    });
+
+    // Show the processing popup.
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const _OtpStatusDialog(
+        status: OtpStatus.processing,
+      ),
+    );
+
+    bool isSuccess = false;
+
+    try {
+      // Verify the OTP using your authentication service.
+      isSuccess = await widget.onVerify(_otp);
+
+      // Keep the processing animation visible briefly.
+      await Future.delayed(const Duration(milliseconds: 900));
+    } catch (_) {
+      isSuccess = false;
     }
 
-    widget.onVerify(_otp);
+    if (!mounted) return;
+
+    // Close the processing popup.
+    Navigator.of(context, rootNavigator: true).pop();
+
+    setState(() {
+      _isVerifying = false;
+    });
+
+    // Show the final result.
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => _OtpStatusDialog(
+        status: isSuccess
+            ? OtpStatus.success
+            : OtpStatus.failure,
+        onContinue: isSuccess
+            ? () {
+          Navigator.of(context, rootNavigator: true).pop();
+        }
+            : () {
+          Navigator.of(context, rootNavigator: true).pop();
+        },
+      ),
+    );
   }
 
   @override
@@ -571,6 +619,138 @@ class _OtpHeroIllustration extends StatelessWidget {
             ),
 
           ],
+        ),
+      ),
+    );
+  }
+}
+
+///Pop up
+enum OtpStatus {
+  processing,
+  success,
+  failure,
+}
+class _OtpStatusDialog extends StatelessWidget {
+  const _OtpStatusDialog({
+    required this.status,
+    this.onContinue,
+  });
+  final OtpStatus status;
+  final VoidCallback? onContinue;
+  @override
+  Widget build(BuildContext context) {
+    final isProcessing = status == OtpStatus.processing;
+    final isSuccess = status == OtpStatus.success;
+    final Color accentColor = isProcessing
+        ? AppColors.primaryBlue
+        : isSuccess
+        ? Colors.green
+        : Colors.redAccent;
+
+    final String title = isProcessing
+        ? 'Verifying your number'
+        : isSuccess
+        ? 'Verification successful!'
+        : 'Verification failed';
+    final String message = isProcessing
+        ? 'Please wait while we verify your OTP.'
+        : isSuccess
+        ? 'Your phone number has been verified successfully.'
+        : 'The OTP could not be verified. Please try again.';
+    return PopScope(
+      canPop: !isProcessing,
+      child: Dialog(
+        backgroundColor: AppColors.white,
+        insetPadding: const EdgeInsets.symmetric(horizontal: 28),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(28),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 30, 24, 24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+
+              /// Status icon / processing indicator
+              Container(
+                width: 86,
+                height: 86,
+                decoration: BoxDecoration(
+                  color: accentColor.withValues(alpha: 0.10),
+                  shape: BoxShape.circle,
+                ),
+                alignment: Alignment.center,
+                child: isProcessing
+                    ? SizedBox(
+                  width: 42,
+                  height: 42,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 4,
+                    color: accentColor,
+                  ),
+                )
+                    : Icon(
+                  isSuccess
+                      ? Icons.check_circle_rounded
+                      : Icons.error_rounded,
+                  color: accentColor,
+                  size: 52,
+                ),
+              ),
+
+              const SizedBox(height: 24),
+
+              /// Title
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.roboto(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.darkBlue950,
+                ),
+              ),
+
+
+              /// Description
+              Text(
+                message,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.roboto(
+                  fontSize: 15,
+                  height: 1.5,
+                  color: AppColors.textSecondary,
+                ),
+              ),
+
+              if (!isProcessing) ...[
+                const SizedBox(height: 26),
+                SizedBox(
+                  width: double.infinity,
+                  height: 80,
+                  child: ElevatedButton(
+                    onPressed: onContinue,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: accentColor,
+                      foregroundColor: Colors.white,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    child: Text(
+                      isSuccess ? 'Continue' : 'Try Again',
+                      style: GoogleFonts.roboto(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
         ),
       ),
     );

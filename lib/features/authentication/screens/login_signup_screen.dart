@@ -63,11 +63,14 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
         builder: (context) => OtpVerificationScreen(
           phoneNumber: phoneNumber,
           /// Called when the user taps Verify & Continue.
-          onVerify: (otp) {
-            debugPrint('Phone: $phoneNumber');
-            debugPrint('OTP: $otp');
+          onVerify: (otp) async {
+            // Simulate an OTP verification request.
+            await Future.delayed(
+              const Duration(seconds: 2),
+            );
 
-            /// TODO: Verify OTP using your authentication backend.
+            // Demo only: 123456 is the valid OTP.
+            return otp == '123456';
           },
           /// Return to the phone number screen.
           onChangePhone: () {
