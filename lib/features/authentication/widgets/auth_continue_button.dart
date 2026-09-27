@@ -9,10 +9,12 @@ class AuthContinueButton extends StatelessWidget {
     super.key,
     required this.enabled,
     required this.onTap,
+    required this.text,
   });
 
   final bool enabled;
   final VoidCallback onTap;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +66,7 @@ class AuthContinueButton extends StatelessWidget {
 
             /// TEXT
             Text(
-              'Continue',
+              text,
               style: GoogleFonts.roboto(
                 color: enabled
                     ? AppColors.white

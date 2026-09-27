@@ -5,6 +5,7 @@ import '../widgets/auth_continue_button.dart';
 import '../widgets/auth_hero_section.dart';
 import '../widgets/phone_number_field.dart';
 import '../widgets/security_info_card.dart';
+import 'otp_verification_screen.dart';
 
 class LoginSignupScreen extends StatefulWidget {
   const LoginSignupScreen({
@@ -49,15 +50,37 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
   }
 
   void _continue() {
+    /// Validate the phone number first.
     if (!_isPhoneValid) return;
-
+    /// Format the phone number with India's country code.
     final String phoneNumber =
         '+91${_phoneController.text.trim()}';
-
     debugPrint('Phone number: $phoneNumber');
+    /// Navigate to the OTP verification screen.
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => OtpVerificationScreen(
+          phoneNumber: phoneNumber,
+          /// Called when the user taps Verify & Continue.
+          onVerify: (otp) {
+            debugPrint('Phone: $phoneNumber');
+            debugPrint('OTP: $otp');
 
-    // TODO:
-    // Send OTP here.
+            /// TODO: Verify OTP using your authentication backend.
+          },
+          /// Return to the phone number screen.
+          onChangePhone: () {
+            Navigator.pop(context);
+          },
+          /// Called when the user requests a new OTP.
+          onResend: () {
+            /// TODO: Send a new OTP using your backend.
+            debugPrint('Resending OTP to $phoneNumber');
+          },
+        ),
+      ),
+    );
   }
 
   void _openPrivacyPolicy() {
@@ -158,6 +181,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
 
                     /// CONTINUE
                     AuthContinueButton(
+                      text: 'Continue',
                       enabled: _isPhoneValid,
                       onTap: _continue,
                     ),

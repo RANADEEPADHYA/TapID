@@ -33,7 +33,7 @@ class AuthHeroSection extends StatelessWidget {
             right: 10,
             top: 70,
             child: Image.asset(
-              'assets/images/TabID_round.png',
+              'assets/images/TabID_transparent.png',
               width: size.width * 0.34,
               height: size.width * 0.34,
               fit: BoxFit.contain,
