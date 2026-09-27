@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../theme/app_colors.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
@@ -164,129 +165,107 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.sizeOf(context).height;
+    final Size size = MediaQuery.sizeOf(context);
 
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Stack(
         children: [
-          /// Soft gradient background.
-          const Positioned.fill(
-            child: _OtpBackground(),
+
+          /// HERO / TOP SECTION
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: size.height * 0.40,
+            child: const _OtpHeroIllustration(),
           ),
 
-          SafeArea(
-            child: Column(
-              children: [
-                // Back button.
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    20,
-                    8,
-                    20,
-                    0,
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: _BackButton(
-                      onTap: () => Navigator.maybePop(context),
-                    ),
-                  ),
+          Positioned(
+            left: 0,
+            right: 0,
+            top: size.height * 0.36,
+            bottom: 0,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(38),
+                  topRight: Radius.circular(38),
                 ),
-
-                Expanded(
-                  child: SingleChildScrollView(
-                    keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.onDrag,
-                    padding: EdgeInsets.zero,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: (screenHeight * 0.025)
-                              .clamp(12.0, 24.0),
-                        ),
-
-                        // Hero illustration.
-                        const _OtpHeroIllustration(),
-
-                        SizedBox(
-                          height: (screenHeight * 0.018)
-                              .clamp(12.0, 22.0),
-                        ),
-
-                        // Main content card.
-                        Container(
-                          width: double.infinity,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFDFDFEFF),
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(42),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                              24,
-                              12,
-                              24,
-                              32,
-                            ),
-                            child: Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              children: [
-                                // Small drag indicator.
-                                Center(
-                                  child: Container(
-                                    width: 64,
-                                    height: 5,
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xFFC8CDE0),
-                                      borderRadius:
-                                      BorderRadius.circular(20),
-                                    ),
-                                  ),
-                                ),
-
-                                const SizedBox(height: 54),
-
-                                _buildHeading(),
-
-                                const SizedBox(height: 52),
-
-                                _buildOtpFields(),
-
-                                const SizedBox(height: 52),
-
-                                _buildResendPanel(),
-
-                                const SizedBox(height: 56),
-
-                                _buildVerifyButton(),
-
-                                const SizedBox(height: 38),
-
-                                _buildDivider(),
-
-                                const SizedBox(height: 28),
-
-                                _buildChangePhoneButton(),
-
-                                const SizedBox(height: 76),
-
-                                _buildSecurityMessage(),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+              ),
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                padding: EdgeInsets.only(
+                  left: 40,
+                  right: 40,
+                  top: 40,
+                  bottom:
+                  MediaQuery.paddingOf(context).bottom + 24,
                 ),
-              ],
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+
+                    /// TITLE
+                    Text(
+                      'Enter your number',
+                      style: GoogleFonts.roboto(
+                        color: AppColors.darkBlue950,
+                        fontSize: 32,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+
+                    /// DESCRIPTION
+                    Text(
+                      'We\'ll send you a verification code to get\n'
+                          'started.',
+                      style: GoogleFonts.roboto(
+                        color: AppColors.textSecondary,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    /// PHONE NUMBER
+
+                    const SizedBox(height: 54),
+
+                    _buildHeading(),
+
+                    const SizedBox(height: 52),
+
+                    _buildOtpFields(),
+
+                    const SizedBox(height: 52),
+
+                    _buildResendPanel(),
+
+                    const SizedBox(height: 56),
+
+                    _buildVerifyButton(),
+
+                    const SizedBox(height: 38),
+
+                    _buildDivider(),
+
+                    const SizedBox(height: 28),
+
+                    _buildChangePhoneButton(),
+
+                    const SizedBox(height: 76),
+
+                    _buildSecurityMessage(),
+                  ],
+                ),
+              ),
             ),
           ),
-        ],
-      ),
+        ]
+      )
     );
   }
 
@@ -599,10 +578,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     );
   }
 
-  // ------------------------------------------------------------
-  // DIVIDER
-  // ------------------------------------------------------------
 
+  /// DIVIDER
   Widget _buildDivider() {
     return Row(
       children: [
@@ -635,10 +612,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     );
   }
 
-  // ------------------------------------------------------------
-  // CHANGE PHONE NUMBER
-  // ------------------------------------------------------------
-
+  /// CHANGE PHONE NUMBER
   Widget _buildChangePhoneButton() {
     return SizedBox(
       width: double.infinity,
@@ -685,10 +659,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     );
   }
 
-  // ------------------------------------------------------------
-  // SECURITY MESSAGE
-  // ------------------------------------------------------------
-
+  /// SECURITY MESSAGE
   Widget _buildSecurityMessage() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -740,116 +711,35 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 }
 
-// ==================================================================
-// BACK BUTTON
-// ==================================================================
-
-class _BackButton extends StatelessWidget {
-  const _BackButton({
-    required this.onTap,
-  });
-
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: onTap,
-      icon: const Icon(
-        Icons.arrow_back_rounded,
-        size: 32,
-        color: AppColors.textPrimary,
-      ),
-      padding: EdgeInsets.zero,
-      constraints: const BoxConstraints(
-        minWidth: 48,
-        minHeight: 48,
-      ),
-      tooltip: 'Go back',
-    );
-  }
-}
-
-// ==================================================================
-// BACKGROUND
-// ==================================================================
-
-class _OtpBackground extends StatelessWidget {
-  const _OtpBackground();
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.hardEdge,
-      children: [
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xFFF0F1FF),
-                Color(0xFFEAF6FF),
-                Color(0xFFFDFDFF),
-              ],
-            ),
-          ),
-        ),
-
-        Positioned(
-          top: -100,
-          left: -130,
-          child: _circle(
-            380,
-            AppColors.primaryPurple.withValues(alpha: 0.12),
-          ),
-        ),
-
-        Positioned(
-          top: 80,
-          right: -160,
-          child: _circle(
-            350,
-            AppColors.primaryBlue.withValues(alpha: 0.12),
-          ),
-        ),
-
-        Positioned(
-          top: 360,
-          left: -160,
-          child: _circle(
-            300,
-            AppColors.primaryPurple.withValues(alpha: 0.07),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _circle(double size, Color color) {
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        color: color,
-        shape: BoxShape.circle,
-      ),
-    );
-  }
-}
-
 /// HERO ILLUSTRATION
 class _OtpHeroIllustration extends StatelessWidget {
   const _OtpHeroIllustration();
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 350,
       width: double.infinity,
-      child: Image.asset(
-        'assets/images/otp_hero_illustration.png',
-        fit: BoxFit.contain,
-        alignment: Alignment.center,
+      child: ClipRect(
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+
+            /// OTP HERO ILLUSTRATION
+            Positioned.fill(
+              child: Transform.scale(
+                scale: 1.4,
+                child: Image.asset(
+                  'assets/images/authentication/otp_hero_illustration.png',
+                  width: double.infinity,
+                  fit: BoxFit.contain,
+                  alignment: Alignment.center,
+                ),
+              ),
+            ),
+
+          ],
+        ),
       ),
     );
   }
