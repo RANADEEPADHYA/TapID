@@ -40,16 +40,6 @@ class AuthContinueButton extends StatelessWidget {
                 : AppColors.textSecondary.withValues(alpha: 0.55,),
           ),
 
-          boxShadow: [
-            BoxShadow(
-              color: enabled
-                  ? AppColors.primaryBlue.withValues(alpha: 0.35,)
-              :AppColors.textSecondary.withValues(alpha: 0.35,),
-              blurRadius: 18,
-              spreadRadius: 1,
-            ),
-          ],
-
           gradient: enabled
               ? AppColors.buttonGradient
               : null,

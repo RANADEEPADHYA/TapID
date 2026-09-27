@@ -178,15 +178,6 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
               ),
 
               gradient: AppColors.buttonGradient,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primaryBlue.withValues(
-                    alpha: 0.35,
-                  ),
-                  blurRadius: 18,
-                  spreadRadius: 1,
-                ),
-              ],
             ),
             child: Stack(
               alignment: Alignment.center,

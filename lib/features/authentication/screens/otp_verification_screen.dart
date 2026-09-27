@@ -229,14 +229,38 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     ),
 
                     /// DESCRIPTION
-                    Text(
-                      'We’ve sent a 6-digit verification code\nto '
-                          '${widget.phoneNumber}',
-                      style: GoogleFonts.roboto(
-                        color: AppColors.textSecondary,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'We’ve sent a 6-digit verification code',
+                          style: GoogleFonts.roboto(
+                            color: AppColors.textSecondary,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                                  'to   ',
+                              style: GoogleFonts.roboto(
+                                color: AppColors.textSecondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            Text(
+                              widget.phoneNumber,
+                              style: GoogleFonts.roboto(
+                                color: AppColors.textSecondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 20),
 
@@ -254,7 +278,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       isLoading: _isVerifying,
                       onTap: verifyOtp,
                     ),
-
                     const SizedBox(height: 10),
 
                     ///DIVIDER
@@ -305,17 +328,17 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         final isFilled = _controllers[index].text.isNotEmpty;
         final isFocused = _focusNodes[index].hasFocus;
 
-        return Expanded(
-          child: Padding(
-            padding: EdgeInsets.only(
-              right: index == _otpLength - 1 ? 0 : 10,
-            ),
+        return [
+          if (index > 0) const SizedBox(width: 10),
+
+          Expanded(
             child: Focus(
               onKeyEvent: (_, event) =>
                   _handleKeyEvent(index, event),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 180),
                 height: 70,
+                width: double.infinity,
                 decoration: BoxDecoration(
                   color: isFocused
                       ? AppColors.primaryBlue50
@@ -376,8 +399,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               ),
             ),
           ),
-        );
-      }),
+        ];
+      }).expand((widgets) => widgets).toList(),
     );
   }
 
