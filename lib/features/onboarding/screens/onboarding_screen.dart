@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tab_id/features/authentication/screens/login_signup_screen.dart';
 import '../controllers/onboarding_controller.dart';
 import '../widgets/onboarding_next_button.dart';
-import '../widgets/onboarding_auth_buttons.dart';
 import '../widgets/onboarding_page_indicator.dart';
 import '../widgets/onboarding_skip_button.dart';
 import 'onboarding_1_one_tap_screen.dart';
@@ -10,7 +9,6 @@ import 'onboarding_2_nfc_screen.dart';
 import 'onboarding_3_privacy_screen.dart';
 import 'onboarding_4_share_screen.dart';
 import 'onboarding_5_get_started_screen.dart';
-
 import '../../../widgets/background_onboarding.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -46,8 +44,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     super.dispose();
   }
 
-  // ═══════════════════════════════════════════════════════════════
-  // GO TO SIGN IN
+  /// GO TO SIGN IN
   void _goToSignIn() {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
@@ -57,10 +54,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-
-
-  // ═══════════════════════════════════════════════════════════════
-  // NEXT
+  /// NEXT
   void _handleNext() {
     if (controller.isLastPage) {
       _goToSignIn();
@@ -69,8 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
   }
 
-  // ═══════════════════════════════════════════════════════════════
-  // SKIP
+  /// SKIP
   void _handleSkip() {
     _goToSignIn();
   }
@@ -84,10 +77,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: SafeArea(
           child: Stack(
             children: [
-              // ═══════════════════════════════════════════════════
-              // ONBOARDING PAGES
-              // ═══════════════════════════════════════════════════
 
+              /// ONBOARDING PAGES
               PageView(
                 controller: controller.pageController,
                 onPageChanged: controller.onPageChanged,
@@ -101,10 +92,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ],
               ),
 
-              // ═══════════════════════════════════════════════════
-              // SKIP — TOP RIGHT
-              // ═══════════════════════════════════════════════════
-
+              /// SKIP — TOP RIGHT
               if (!isLastPage)
                 Positioned(
                   top: 20,
@@ -114,14 +102,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
 
-              // ═══════════════════════════════════════════════════
-              // PAGE INDICATOR
-              // ═══════════════════════════════════════════════════
-
+              /// PAGE INDICATOR
               Positioned(
                 left: 0,
                 right: 0,
-                bottom: 130,
+                bottom: 110,
 
                 child: OnboardingPageIndicator(
                   currentPage: controller.currentPage,
@@ -129,18 +114,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
 
-              // ═══════════════════════════════════════════════════
-              // BOTTOM ACTION BUTTONS
-              // ═══════════════════════════════════════════════════
 
+              /// BOTTOM ACTION BUTTONS
               Positioned(
                 left: 20,
                 right: 20,
                 bottom: 20,
 
                 child: isLastPage
-                    ? OnboardingAuthButtons(
-                  onSignIn: _goToSignIn,
+                    ? OnboardingNextButton(
+                  label: 'Sign in',
+                  onTap: _handleNext,
                 )
                     : OnboardingNextButton(
                   label: 'Next',

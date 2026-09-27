@@ -91,4 +91,13 @@ class AppColors {
       primaryPurple,
     ],
   );
+  static const LinearGradient onboardingTextGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      skyBlue200,
+      primaryBlue,
+      primaryPurple,
+    ],
+  );
 }

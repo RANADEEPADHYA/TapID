@@ -44,7 +44,7 @@ class AuthHeroSection extends StatelessWidget {
           /// TAPID TEXT
           Positioned(
             left: 30,
-            top:50,
+            top:40,
             child: const AppName(
               fontSize: 50,
               fontWeight: FontWeight.w900,
@@ -55,7 +55,7 @@ class AuthHeroSection extends StatelessWidget {
           /// TAGLINE
           Positioned(
             left: 30,
-            top:115,
+            top:120,
             child: SizedBox(
               width: size.width * 0.52,
               child: Text(
@@ -74,7 +74,7 @@ class AuthHeroSection extends StatelessWidget {
           /// FEATURE LIST
           Positioned(
             left: 30,
-            top: 185,
+            top: 190,
             child: const _HeroFeatures(),
           ),
         ],

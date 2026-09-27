@@ -37,7 +37,6 @@ class Onboarding1OneTapScreen extends StatelessWidget {
                 child: Column(
                   children: [
 
-                    /// ─────────────────────────────────────
                     /// MAIN CONTENT
                     Expanded(
                       child: Padding(
@@ -48,19 +47,15 @@ class Onboarding1OneTapScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
 
-                            /// ─────────────────────────────
                             /// TOP SPACING
                             SizedBox(height: (height * 0.035).clamp(20.0, 40.0,),),
 
-                            /// ─────────────────────────────
                             /// HEADER
                             const _WelcomeHeader(),
 
-                            /// ─────────────────────────────
                             /// SPACING
                             SizedBox(height: (height * 0.018).clamp(12.0, 22.0,),),
 
-                            /// ─────────────────────────────
                             /// DESCRIPTION
                             Text(
                               'Share everything about you with just\n'
@@ -72,22 +67,18 @@ class Onboarding1OneTapScreen extends StatelessWidget {
                               ),
                             ),
 
-                            /// ─────────────────────────────
                             /// SPACING
                             SizedBox(height: (height * 0.05).clamp(20.0, 45.0,),),
 
-                            /// ─────────────────────────────
                             /// MAIN ILLUSTRATION
                             const OnboardingMainIllustration(
                               imagePath:
                               'assets/images/Onboarding/onboarding_1.png',
                             ),
 
-                            /// ─────────────────────────────
                             /// SPACING
                             SizedBox(height: (height * 0.015).clamp(12.0, 24.0,),),
 
-                            /// ─────────────────────────────
                             /// BOTTOM MESSAGE
                             Center(
                               child: Text(
@@ -101,7 +92,6 @@ class Onboarding1OneTapScreen extends StatelessWidget {
                               ),
                             ),
 
-                            /// ─────────────────────────────
                             /// BOTTOM MESSAGE
                             Center(
                               child: Text(
@@ -115,7 +105,6 @@ class Onboarding1OneTapScreen extends StatelessWidget {
                               ),
                             ),
 
-                            /// ─────────────────────────────
                             /// Spacing
                             SizedBox(height: (height * 0.04).clamp(18.0, 32.0,),),
                           ],
@@ -133,7 +122,6 @@ class Onboarding1OneTapScreen extends StatelessWidget {
   }
 }
 
-/// ═══════════════════════════════════════════════════════════════
 /// WELCOME HEADER
 class _WelcomeHeader extends StatelessWidget {
   const _WelcomeHeader();
@@ -143,6 +131,7 @@ class _WelcomeHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+
         Text(
           'Welcome to',
           style: GoogleFonts.roboto(

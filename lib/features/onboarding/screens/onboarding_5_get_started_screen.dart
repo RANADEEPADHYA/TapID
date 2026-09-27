@@ -18,11 +18,9 @@ class Onboarding5GetStartedScreen extends StatelessWidget {
             final width = constraints.maxWidth;
             final height = constraints.maxHeight;
 
-            /// ─────────────────────────────────────────────
             /// Responsive horizontal padding
             final horizontalPadding = (width * 0.07).clamp(20.0, 80.0,);
 
-            /// ─────────────────────────────────────────────
             /// Limit content width on tablets / desktop
             final contentWidth = width > 700 ? 650.0 : width;
 
@@ -34,7 +32,6 @@ class Onboarding5GetStartedScreen extends StatelessWidget {
                 child: Column(
                   children: [
 
-                    /// ─────────────────────────────────────
                     /// MAIN CONTENT
                     Expanded(
                       child: Padding(
@@ -45,19 +42,15 @@ class Onboarding5GetStartedScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
 
-                            /// ─────────────────────────────
                             /// TOP SPACING
                             SizedBox(height: (height * 0.035).clamp(20.0, 40.0,),),
 
-                            /// ─────────────────────────────
                             /// HEADER
                             const _OnboardingHeader(),
 
-                            /// ─────────────────────────────
                             /// SPACING
                             SizedBox(height: (height * 0.018).clamp(12.0, 22.0,),),
 
-                            /// ─────────────────────────────
                             /// DESCRIPTION
                             Text(
                               'Your TapID is set. One tap is all it takes\n'
@@ -69,22 +62,18 @@ class Onboarding5GetStartedScreen extends StatelessWidget {
                               ),
                             ),
 
-                            /// ─────────────────────────────
                             /// SPACING
                             SizedBox(height: (height * 0.05).clamp(20.0, 45.0,),),
 
-                            /// ─────────────────────────────
                             /// MAIN ILLUSTRATION
                             const OnboardingMainIllustration(
                               imagePath:
                               'assets/images/Onboarding/onboarding_5.png',
                             ),
 
-                            /// ─────────────────────────────
                             /// SPACING
                             SizedBox(height: (height * 0.015).clamp(12.0, 24.0,),),
 
-                            /// ─────────────────────────────
                             /// BOTTOM MESSAGE
                             Center(
                               child: Text(
@@ -98,7 +87,6 @@ class Onboarding5GetStartedScreen extends StatelessWidget {
                               ),
                             ),
 
-                            /// ─────────────────────────────
                             /// BOTTOM MESSAGE
                             Center(
                               child: Text(
@@ -112,7 +100,6 @@ class Onboarding5GetStartedScreen extends StatelessWidget {
                               ),
                             ),
 
-                            /// ─────────────────────────────
                             /// Spacing
                             SizedBox(height: (height * 0.04).clamp(18.0, 32.0,),),
                           ],
@@ -130,16 +117,15 @@ class Onboarding5GetStartedScreen extends StatelessWidget {
   }
 }
 
-/// ═══════════════════════════════════════════════════════════════
 /// HEADER
 class _OnboardingHeader extends StatelessWidget {
   const _OnboardingHeader();
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+
         Text(
           'Ready to.',
           style: GoogleFonts.roboto(
@@ -148,12 +134,18 @@ class _OnboardingHeader extends StatelessWidget {
             color: AppColors.black,
           ),
         ),
-        Text(
-          'Tap & Connect.',
-          style: GoogleFonts.lobsterTwo(
-            fontSize: 45,
-            fontWeight: FontWeight.w900,
-            color: AppColors.primaryBlue,
+
+        ShaderMask(
+          blendMode: BlendMode.srcIn,
+          shaderCallback: (bounds) =>
+              AppColors.onboardingTextGradient.createShader(bounds),
+          child: Text(
+            'Tap & Connect.',
+            style: GoogleFonts.lobsterTwo(
+              fontSize: 45,
+              fontWeight: FontWeight.w900,
+              color: AppColors.white,
+            ),
           ),
         ),
       ],

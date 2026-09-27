@@ -20,25 +20,34 @@ class OnboardingNextButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        height: 80,
         padding: const EdgeInsets.symmetric(
-          horizontal: 20,
+          horizontal: 18,
+          vertical: 12,
         ),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [
-              AppColors.primaryBlue,
-              AppColors.nextButtonPurple,
-            ],
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(
+            color: AppColors.primaryBlue.withValues(
+              alpha: 0.55,
+            ),
+            width: 1,
           ),
-          borderRadius: BorderRadius.circular(36),
+
+          gradient: AppColors.buttonGradient,
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primaryBlue.withValues(
+                alpha: 0.35,
+              ),
+              blurRadius: 18,
+              spreadRadius: 1,
+            ),
+          ],
         ),
         child: Stack(
           alignment: Alignment.center,
           children: [
-            /// ─────────────────────────────────
+
             /// TEXT — CENTER
             Center(
               child: Text(
@@ -51,7 +60,6 @@ class OnboardingNextButton extends StatelessWidget {
               ),
             ),
 
-            /// ─────────────────────────────────
             /// ARROW — RIGHTMOST
             const Positioned(
               right: 0,

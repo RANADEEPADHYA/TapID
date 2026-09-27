@@ -29,10 +29,10 @@ class OnboardingMainIllustration extends StatelessWidget {
             height: size.width * 0.82,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.onboardingMainIllusion.withValues(alpha: 0.15),
+              color: AppColors.onboardingMainIllusion.withValues(alpha: 0.25),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.onboardingMainIllusion.withValues(alpha: 0.05),
+                  color: AppColors.onboardingPurpleAccent.withValues(alpha: 0.05),
                   blurRadius: 60,
                   spreadRadius: 20,
                 ),
@@ -47,7 +47,7 @@ class OnboardingMainIllustration extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: AppColors.onboardingMainIllusion.withValues(alpha: 0.15),
+                color: AppColors.onboardingMainIllusion.withValues(alpha: 0.35),
                 width: 2,
               ),
             ),
