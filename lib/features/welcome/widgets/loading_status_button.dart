@@ -163,7 +163,7 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
           onTap: widget.onFinished,
 
           child: Container(
-            width: width,
+            width: double.infinity,
             padding: const EdgeInsets.symmetric(
               horizontal: 18,
               vertical: 12,

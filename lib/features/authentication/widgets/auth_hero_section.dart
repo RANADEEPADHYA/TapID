@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tab_id/widgets/app_name.dart';
-
 import '../../../theme/app_colors.dart';
 
 class AuthHeroSection extends StatelessWidget {

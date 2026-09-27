@@ -29,19 +29,27 @@ class AuthContinueButton extends StatelessWidget {
           horizontal: 18,
           vertical: 12,
         ),
-
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(
+            width: 1,
+            color: enabled
+                ? AppColors.primaryBlue.withValues(alpha: 0.55,)
+                : AppColors.textSecondary.withValues(alpha: 0.55,),
+          ),
+
+          boxShadow: [
+            BoxShadow(
+              color: enabled
+                  ? AppColors.primaryBlue.withValues(alpha: 0.35,)
+              :AppColors.textSecondary.withValues(alpha: 0.35,),
+              blurRadius: 18,
+              spreadRadius: 1,
+            ),
+          ],
 
           gradient: enabled
-              ? const LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [
-              AppColors.primaryBlue,
-              AppColors.primaryBlue,
-            ],
-          )
+              ? AppColors.buttonGradient
               : null,
 
           color: enabled
@@ -67,15 +75,15 @@ class AuthContinueButton extends StatelessWidget {
             ),
 
             /// Animated right arrow
-              Positioned(
-                right: 0,
-                child: AnimatedArrow(
-                  size: 40,
-                  color: enabled
-                      ? AppColors.white
-                      : AppColors.textSecondary,
-                ),
+            Positioned(
+              right: 0,
+              child: AnimatedArrow(
+                size: 40,
+                color: enabled
+                    ? AppColors.white
+                    : AppColors.textSecondary,
               ),
+            ),
           ],
         ),
       ),
