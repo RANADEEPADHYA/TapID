@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tab_id/widgets/app_name.dart';
 import '../../../theme/app_colors.dart';
 import '../../../widgets/back_button.dart';
+import '../widgets/profile_save_continue_button.dart';
 
 class CreateProfileScreen extends StatefulWidget {
   const CreateProfileScreen({
@@ -43,6 +44,11 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   bool _isCheckingUsername = false;
   bool _isUsernameAvailable = false;
   bool _usernameChecked = false;
+
+  bool get _isFormValid {
+    return _nameController.text.trim().isNotEmpty &&
+        _usernameController.text.trim().isNotEmpty;
+  }
 
   String? _usernameMessage;
 
@@ -325,26 +331,28 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
             const SizedBox(height: 10),
 
             /// Heading 3
-            Text(
-              'Add profile photo',
-              style: GoogleFonts.roboto(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
-              ),
-            ),
+            Column(
+              children: [
+                Text(
+                  'Add profile photo',
+                  style: GoogleFonts.roboto(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
 
-            /// Heading 4
-            Text(
-              'JPG, PNG up to 5MB',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: AppColors.textTertiary,
-              ),
+                Text(
+                  'JPG, PNG up to 5MB',
+                  style: GoogleFonts.roboto(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.textTertiary,
+                  ),
+                ),
+              ],
             ),
-
-            const SizedBox(height: 34),
+            const SizedBox(height: 20),
 
             _buildFullNameField(),
 
@@ -362,7 +370,11 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
 
             const SizedBox(height: 24),
 
-            _buildSaveButton(),
+            ProfileSaveContinueButton(
+              enabled: _isFormValid,
+              onTap: _saveAndContinue,
+              text: 'Save Profile',
+            ),
 
             const SizedBox(height: 20),
           ],
@@ -371,10 +383,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     );
   }
 
-  // ----------------------------------------------------------
-  // PROFILE PHOTO
-  // ----------------------------------------------------------
-
+  /// PROFILE PHOTO
   Widget _buildPhotoPicker() {
     return Center(
       child: Column(
@@ -405,9 +414,15 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                     ],
                   ),
                   child: ClipOval(
-                    child: CustomPaint(
-                      painter: _AvatarPlaceholderPainter(),
-                      child: const SizedBox.expand(),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Icon(
+                          Icons.person_rounded,
+                          size: 200,
+                          color: AppColors.textSecondary,
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -448,21 +463,27 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     );
   }
 
-  // ----------------------------------------------------------
-  // FULL NAME
-  // ----------------------------------------------------------
-
+  /// FULL NAME
   Widget _buildFullNameField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildLabel('Full Name'),
 
-        const SizedBox(height: 10),
+        /// TITLE
+        _buildLabel('Full Name'),
+        const SizedBox(height: 5),
 
         TextFormField(
           controller: _nameController,
           maxLength: _maxNameLength,
+          /// Text style
+          style: GoogleFonts.roboto(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: AppColors.textPrimary,
+            letterSpacing: 0.2,
+            height: 1.4,
+          ),
           textCapitalization: TextCapitalization.words,
           keyboardType: TextInputType.name,
           textInputAction: TextInputAction.next,
@@ -475,39 +496,42 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
             if (value == null || value.trim().isEmpty) {
               return 'Please enter your full name';
             }
-
             if (value.trim().length < 2) {
               return 'Name must contain at least 2 characters';
             }
-
             return null;
           },
           decoration: _inputDecoration(
             hint: 'Enter your full name',
             prefixIcon: Icons.person_outline_rounded,
-            counter: '${_nameController.text.length}/$_maxNameLength',
-          ),
+          ).copyWith(counterText: ''),
           onChanged: (_) => setState(() {}),
         ),
       ],
     );
   }
 
-  // ----------------------------------------------------------
-  // USERNAME
-  // ----------------------------------------------------------
-
+  /// USERNAME
   Widget _buildUsernameField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildLabel('Username'),
 
-        const SizedBox(height: 10),
+        /// TITLE
+        _buildLabel('Username'),
+        const SizedBox(height: 5),
 
         TextFormField(
           controller: _usernameController,
-          maxLength: 20,
+          maxLength: _maxNameLength,
+          /// Text style
+          style: GoogleFonts.roboto(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: AppColors.textPrimary,
+            letterSpacing: 0.2,
+            height: 1.4,
+          ),
           textInputAction: TextInputAction.next,
           autocorrect: false,
           enableSuggestions: false,
@@ -521,20 +545,17 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
             hint: 'Enter a unique username',
             prefixIcon: Icons.alternate_email_rounded,
             suffix: _buildUsernameCheckButton(),
-          ),
+          ).copyWith(counterText: ''),
         ),
-
-        const SizedBox(height: 12),
 
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
             _usernameMessage ??
-                'Username must be 3–20 characters and contain '
-                    'letters, numbers or underscores.',
-            style: TextStyle(
+                'Username must be 3–20 characters and '
+                    'contain letters, numbers or underscores.',
+            style: GoogleFonts.roboto(
               fontSize: 14,
-              height: 1.55,
               color: _usernameChecked
                   ? (_isUsernameAvailable
                   ? Colors.green.shade700
@@ -547,6 +568,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     );
   }
 
+  /// USERNAME BUTTON
   Widget _buildUsernameCheckButton() {
     return Padding(
       padding: const EdgeInsets.only(right: 5),
@@ -572,10 +594,10 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
             color: AppColors.primaryPurple,
           ),
         )
-            : const Text(
+            : Text(
           'Check',
-          style: TextStyle(
-            fontSize: 15,
+          style: GoogleFonts.roboto(
+            fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -583,17 +605,16 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     );
   }
 
-  // ----------------------------------------------------------
-  // BIO
-  // ----------------------------------------------------------
 
+  /// BIO
   Widget _buildBioField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildLabel('Bio (Optional)'),
 
-        const SizedBox(height: 10),
+        /// TITLE
+        _buildLabel('Bio (Optional)'),
+        const SizedBox(height: 5),
 
         TextFormField(
           controller: _bioController,
@@ -615,127 +636,65 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     );
   }
 
-  // ----------------------------------------------------------
-  // PRIVACY NOTICE
-  // ----------------------------------------------------------
-
+  /// PRIVACY NOTICE
   Widget _buildPrivacyNotice() {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(18),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: AppColors.purple50,
+        color: AppColors.skyBlue100,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
         children: [
           Container(
-            width: 48,
-            height: 48,
+            width: 40,
+            height: 40,
             decoration: BoxDecoration(
-              color: AppColors.white.withValues(alpha: 0.8),
-              borderRadius: BorderRadius.circular(15),
+              color: AppColors.skyBlue300,
+              borderRadius: BorderRadius.circular(30),
             ),
             child: const Icon(
               Icons.verified_user_outlined,
-              color: AppColors.primaryPurple,
-              size: 29,
+              color: AppColors.primaryBlue800,
+              size: 28,
             ),
           ),
 
-          const SizedBox(width: 15),
+          const SizedBox(width: 10),
 
-          const Expanded(
-            child: Text(
-              'Your profile helps people connect with you.\n'
-                  'You can change these details anytime.',
-              style: TextStyle(
-                fontSize: 14,
-                height: 1.6,
-                color: AppColors.textPrimary,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
-  // ----------------------------------------------------------
-  // SAVE & CONTINUE
-  // ----------------------------------------------------------
-
-  Widget _buildSaveButton() {
-    return Container(
-      width: double.infinity,
-      height: 70,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: [
-            AppColors.primaryPurple,
-            AppColors.primaryPurple600,
-            AppColors.primaryPurple800,
-          ],
-        ),
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.primaryPurple
-                .withValues(alpha: 0.20),
-            blurRadius: 18,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: _saveAndContinue,
-          borderRadius: BorderRadius.circular(20),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+           Column(
+             mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Flexible(
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      'Save & Continue',
-                      style: TextStyle(
-                        fontSize: 19,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.white,
-                      ),
-                    ),
+                Text(
+                  'Your profile helps people connect with you.',
+                  style: GoogleFonts.roboto(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.textPrimary,
                   ),
                 ),
-
-                SizedBox(width: 22),
-
-                Icon(
-                  Icons.arrow_forward_rounded,
-                  color: AppColors.white,
-                  size: 27,
+                Text(
+                  'You can change these details anytime.',
+                  style: GoogleFonts.roboto(
+                    fontSize: 11,
+                    color: AppColors.textPrimary,
+                  ),
                 ),
               ],
-            ),
-          ),
-        ),
+           ),
+        ],
       ),
     );
   }
 
-  // ----------------------------------------------------------
-  // SHARED FORM STYLES
-  // ----------------------------------------------------------
-
+  /// SHARED FORM STYLES
   Widget _buildLabel(String label) {
     return Text(
       label,
-      style: const TextStyle(
+      style: GoogleFonts.roboto(
         fontSize: 17,
         fontWeight: FontWeight.w600,
         color: AppColors.textPrimary,
@@ -752,10 +711,17 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   }) {
     return InputDecoration(
       hintText: hint,
-      hintStyle: const TextStyle(
-        fontSize: 15,
+      hintStyle: GoogleFonts.roboto(
+        fontSize: 16,
         color: AppColors.textTertiary,
         fontWeight: FontWeight.w400,
+      ),
+      errorStyle: GoogleFonts.roboto(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        color: Colors.redAccent,
+        letterSpacing: 0.1,
+        height: 1.4,
       ),
       prefixIcon: Icon(
         prefixIcon,
@@ -763,16 +729,11 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
         size: 25,
       ),
       suffixIcon: suffix,
-      counterText: counter,
-      counterStyle: const TextStyle(
-        fontSize: 13,
-        color: AppColors.textTertiary,
-      ),
       alignLabelWithHint: alignLabelWithHint,
       filled: true,
       fillColor: AppColors.white.withValues(alpha: 0.75),
       contentPadding: const EdgeInsets.symmetric(
-        horizontal: 18,
+        horizontal: 10,
         vertical: 20,
       ),
       border: OutlineInputBorder(

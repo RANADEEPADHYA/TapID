@@ -189,15 +189,6 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
                   mainAxisSize: MainAxisSize.min,
                   children: [
 
-
-                    /// Icon
-                    const Icon(
-                      Icons.check_circle_rounded,
-                      color: AppColors.white,
-                      size: 32,
-                    ),
-
-
                     /// Text
                     Text(
                       widget.finishedText,
@@ -208,15 +199,6 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
                       ),
                     ),
                   ],
-                ),
-
-
-                /// Animated right arrow
-                const Positioned(
-                  right: 0,
-                  child: AnimatedArrow(
-                    size: 40,
-                  ),
                 ),
               ],
             ),

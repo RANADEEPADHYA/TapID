@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../theme/app_colors.dart';
-import '../../../widgets/animated_arrow.dart';
 
 class OtpVerificationButton extends StatelessWidget {
   const OtpVerificationButton({
@@ -60,26 +59,6 @@ class OtpVerificationButton extends StatelessWidget {
                     : AppColors.textSecondary,
                 fontSize: 28,
                 fontWeight: FontWeight.w700,
-              ),
-            ),
-
-            /// LOADING INDICATOR / ANIMATED ARROW
-            Positioned(
-              right: 0,
-              child: isLoading
-                  ? SizedBox(
-                width: 28,
-                height: 28,
-                child: CircularProgressIndicator(
-                  strokeWidth: 3,
-                  color: AppColors.primaryBlue,
-                ),
-              )
-                  : AnimatedArrow(
-                size: 40,
-                color: isActive
-                    ? AppColors.white
-                    : AppColors.textSecondary,
               ),
             ),
           ],
