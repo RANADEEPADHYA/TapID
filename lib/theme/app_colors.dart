@@ -100,4 +100,13 @@ class AppColors {
       primaryPurple,
     ],
   );
+
+  static const LinearGradient background = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      AppColors.white,
+      purple300,
+    ],
+  );
 }

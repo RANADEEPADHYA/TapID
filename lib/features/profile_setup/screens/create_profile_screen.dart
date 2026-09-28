@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:tab_id/widgets/app_name.dart';
 import '../../../theme/app_colors.dart';
+import '../../../widgets/back_button.dart';
 
 class CreateProfileScreen extends StatefulWidget {
   const CreateProfileScreen({
@@ -18,7 +21,6 @@ class CreateProfileScreen extends StatefulWidget {
   required String username,
   required String bio,
   }) onContinue;
-
   final VoidCallback onSkip;
   final VoidCallback? onBack;
   final VoidCallback? onPickPhoto;
@@ -178,102 +180,84 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F8FF),
-      body: Stack(
-        children: [
-          const Positioned.fill(
-            child: _ProfileBackground(),
-          ),
+      backgroundColor: Colors.transparent,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: AppColors.background,
+        ),
+        child: SafeArea(
+          child: Stack(
+            children: [
+              /// Main content
+              Column(
+                children: [
+                  const SizedBox(height: 20),
 
-          SafeArea(
-            child: Column(
-              children: [
-                _buildTopBar(),
+                  /// Top Text
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Create Profile',
+                        style: GoogleFonts.roboto(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
+                    ],
+                  ),
 
-                Expanded(
-                  child: SingleChildScrollView(
-                    keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.onDrag,
-                    padding: const EdgeInsets.fromLTRB(
-                      20,
-                      12,
-                      20,
-                      28,
-                    ),
-                    child: Column(
-                      children: [
-                        const _ProfileProgressIndicator(),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
+                      padding: const EdgeInsets.fromLTRB(
+                        20,
+                        12,
+                        20,
+                        28,
+                      ),
+                      child: Column(
+                        children: [
+                          const _ProfileProgressIndicator(),
 
-                        const SizedBox(height: 30),
+                          const SizedBox(height: 30),
 
-                        _buildProfileCard(),
-                      ],
+                          _buildProfileCard(),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+                ],
+              ),
 
-  // ----------------------------------------------------------
-  // TOP BAR
-  // ----------------------------------------------------------
-
-  Widget _buildTopBar() {
-    return SizedBox(
-      height: 72,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Material(
-                color: AppColors.white,
-                shape: const CircleBorder(),
-                child: InkWell(
-                  onTap: widget.onBack ??
-                          () => Navigator.maybePop(context),
-                  customBorder: const CircleBorder(),
-                  child: const SizedBox(
-                    width: 54,
-                    height: 54,
-                    child: Icon(
-                      Icons.arrow_back_rounded,
-                      size: 29,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
+              /// Floating back button
+              Positioned(
+                top: 15,
+                left: 20,
+                child: AppBackButton(
+                  size: 48,
+                  iconSize: 24,
+                  onTap: () {
+                    Navigator.of(context).maybePop();
+                  },
                 ),
               ),
-            ),
+            ],
           ),
-
-          const Text(
-            'Create Profile',
-            style: TextStyle(
-              fontSize: 23,
-              fontWeight: FontWeight.w700,
-              letterSpacing: -0.6,
-              color: AppColors.textPrimary,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
 
-  // ----------------------------------------------------------
-  // PROFILE FORM CARD
-  // ----------------------------------------------------------
 
+  /// PROFILE FORM CARD
   Widget _buildProfileCard() {
     return Container(
       width: double.infinity,
@@ -302,13 +286,63 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
       child: Form(
         key: _formKey,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildCardHeading(),
 
-            const SizedBox(height: 34),
+            /// Heading 1
+            Text(
+              'Let’s create your identity',
+              style: GoogleFonts.roboto(
+                fontSize: 26,
+                fontWeight: FontWeight.w700,
+                color: AppColors.textPrimary,
+              ),
+            ),
+
+            /// Heading 2
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Add a few details to get started with ',
+                  style: GoogleFonts.roboto(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.textSecondary,
+                  ),
+                ),
+                AppName(
+                  tapColor: AppColors.black,
+                  splitColor: true,
+                  fontSize: 18,
+                )
+              ],
+            ),
+            const SizedBox(height: 20),
 
             _buildPhotoPicker(),
+
+            const SizedBox(height: 10),
+
+            /// Heading 3
+            Text(
+              'Add profile photo',
+              style: GoogleFonts.roboto(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
+              ),
+            ),
+
+            /// Heading 4
+            Text(
+              'JPG, PNG up to 5MB',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: AppColors.textTertiary,
+              ),
+            ),
 
             const SizedBox(height: 34),
 
@@ -331,58 +365,9 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
             _buildSaveButton(),
 
             const SizedBox(height: 20),
-
-            _buildSkipButton(),
           ],
         ),
       ),
-    );
-  }
-
-  // ----------------------------------------------------------
-  // HEADING
-  // ----------------------------------------------------------
-
-  Widget _buildCardHeading() {
-    return Column(
-      children: [
-        const Text(
-          'Let’s create your identity',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 26,
-            height: 1.3,
-            fontWeight: FontWeight.w700,
-            letterSpacing: -0.7,
-            color: AppColors.textPrimary,
-          ),
-        ),
-
-        const SizedBox(height: 10),
-
-        Text.rich(
-          TextSpan(
-            style: const TextStyle(
-              fontSize: 16,
-              height: 1.6,
-              color: AppColors.textSecondary,
-            ),
-            children: [
-              const TextSpan(
-                text: 'Add a few details to get started with ',
-              ),
-              TextSpan(
-                text: 'TapID.',
-                style: TextStyle(
-                  color: AppColors.primaryPurple,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ],
     );
   }
 
@@ -456,27 +441,6 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                   ),
                 ),
               ],
-            ),
-          ),
-
-          const SizedBox(height: 22),
-
-          const Text(
-            'Add profile photo',
-            style: TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
-            ),
-          ),
-
-          const SizedBox(height: 7),
-
-          const Text(
-            'JPG, PNG up to 5MB',
-            style: TextStyle(
-              fontSize: 14,
-              color: AppColors.textTertiary,
             ),
           ),
         ],
@@ -765,32 +729,6 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   }
 
   // ----------------------------------------------------------
-  // SKIP
-  // ----------------------------------------------------------
-
-  Widget _buildSkipButton() {
-    return Center(
-      child: TextButton(
-        onPressed: widget.onSkip,
-        style: TextButton.styleFrom(
-          foregroundColor: AppColors.primaryPurple,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 12,
-          ),
-        ),
-        child: const Text(
-          'Skip for now',
-          style: TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-    );
-  }
-
-  // ----------------------------------------------------------
   // SHARED FORM STYLES
   // ----------------------------------------------------------
 
@@ -1019,66 +957,6 @@ class _ProgressLine extends StatelessWidget {
         ),
       )
           : null,
-    );
-  }
-}
-
-// ==================================================================
-// BACKGROUND
-// ==================================================================
-
-class _ProfileBackground extends StatelessWidget {
-  const _ProfileBackground();
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.hardEdge,
-      children: [
-        const DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xFFF1F1FF),
-                Color(0xFFF6F9FF),
-                Color(0xFFFDFDFF),
-              ],
-            ),
-          ),
-          child: SizedBox.expand(),
-        ),
-
-        Positioned(
-          top: -130,
-          left: -150,
-          child: _backgroundCircle(
-            330,
-            AppColors.primaryPurple.withValues(alpha: 0.045),
-          ),
-        ),
-
-        Positioned(
-          top: 240,
-          right: -190,
-          child: _backgroundCircle(
-            350,
-            AppColors.primaryBlue.withValues(alpha: 0.04),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _backgroundCircle(double size, Color color) {
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        color: color,
-        shape: BoxShape.circle,
-      ),
     );
   }
 }
