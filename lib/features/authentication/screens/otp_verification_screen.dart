@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../theme/app_colors.dart';
+import '../../../widgets/back_button.dart';
+import '../../profile_setup/screens/create_profile_screen.dart';
 import '../widgets/otp_verification_button.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
@@ -105,7 +107,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   void _resendOtp() {
     if (_remainingSeconds > 0) return;
-    // Clear the existing OTP.
+    /// Clear the existing OTP.
     for (final controller in _controllers) {
       controller.clear();
     }
@@ -166,7 +168,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       _isVerifying = true;
     });
 
-    // Show the processing popup.
+    /// Show the processing popup.
     showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -178,42 +180,75 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     bool isSuccess = false;
 
     try {
-      // Verify the OTP using your authentication service.
+      /// Verify the OTP using your authentication service.
       isSuccess = await widget.onVerify(_otp);
-
-      // Keep the processing animation visible briefly.
+      /// Keep the processing animation visible briefly.
       await Future.delayed(const Duration(milliseconds: 900));
     } catch (_) {
       isSuccess = false;
     }
-
     if (!mounted) return;
-
-    // Close the processing popup.
+    /// Close the processing popup.
     Navigator.of(context, rootNavigator: true).pop();
-
     setState(() {
       _isVerifying = false;
     });
 
-    // Show the final result.
+    /// Show the final result.
     await showDialog<void>(
       context: context,
       barrierDismissible: false,
-      builder: (_) => _OtpStatusDialog(
+      builder: (dialogContext) => _OtpStatusDialog(
         status: isSuccess
             ? OtpStatus.success
             : OtpStatus.failure,
-        onContinue: isSuccess
-            ? () {
-          Navigator.of(context, rootNavigator: true).pop();
-        }
-            : () {
-          Navigator.of(context, rootNavigator: true).pop();
+        onContinue: () {
+
+          /// SUCCESS: Close dialog and navigate to Create Profile.
+          if (isSuccess) {
+            Navigator.of(dialogContext).pop();
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CreateProfileScreen(
+                  onContinue: ({
+                    required fullName,
+                    required username,
+                    required bio,
+                  }) {
+                    debugPrint('Name: $fullName');
+                    debugPrint('Username: $username');
+                    debugPrint('Bio: $bio');
+                    // TODO: Save the profile to your backend.
+                    // Navigate to Step 2: Social Links.
+                  },
+                  onSkip: () {
+                    // Navigate to Step 2: Social Links.
+                  },
+                  onCheckUsername: (username) async {
+                    // TODO: Check username availability through
+                    // your backend. Return true if available.
+                    return false;
+                  },
+                  onPickPhoto: () {
+                    // TODO: Open the gallery or camera.
+                  },
+                ),
+              ),
+            );
+          }
+
+          /// FAILURE: Only close the dialog.
+          else {
+            Navigator.of(dialogContext).pop();
+          }
         },
       ),
     );
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -222,14 +257,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       backgroundColor: AppColors.white,
       body: Stack(
         children: [
-
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            height: size.height * 0.40,
-            child: const _OtpHeroIllustration(),
-          ),
 
           /// HERO / TOP SECTION
           Positioned(
@@ -362,6 +389,17 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   ],
                 ),
               ),
+            ),
+          ),
+
+          /// FLOATING BACK BUTTON
+          Positioned(
+            top: 50,
+            left: 20,
+            child: AppBackButton(
+              size: 48,
+              iconSize: 24,
+              onTap: widget.onChangePhone,
             ),
           ),
         ]
@@ -510,7 +548,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         _formattedTime,
                         style: GoogleFonts.roboto(
                           fontSize: 16,
-                          color: AppColors.primaryPurple,
+                          color: AppColors.primaryBlue700,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -733,7 +771,7 @@ class _OtpStatusDialog extends StatelessWidget {
                     onPressed: onContinue,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: accentColor,
-                      foregroundColor: Colors.white,
+                      foregroundColor: AppColors.white,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),

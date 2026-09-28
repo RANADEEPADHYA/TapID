@@ -11,18 +11,14 @@ class LoginSignupScreen extends StatefulWidget {
   const LoginSignupScreen({
     super.key,
   });
-
   @override
-  State<LoginSignupScreen> createState() =>
-      _LoginSignupScreenState();
+  State<LoginSignupScreen> createState() => _LoginSignupScreenState();
 }
 
 class _LoginSignupScreenState extends State<LoginSignupScreen> {
   final TextEditingController _phoneController =
   TextEditingController();
-
   final FocusNode _phoneFocusNode = FocusNode();
-
   bool get _isPhoneValid {
     return _phoneController.text.trim().length == 10;
   }
@@ -30,7 +26,6 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
   @override
   void initState() {
     super.initState();
-
     _phoneController.addListener(_onPhoneChanged);
   }
 
@@ -43,9 +38,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
     _phoneController
       ..removeListener(_onPhoneChanged)
       ..dispose();
-
     _phoneFocusNode.dispose();
-
     super.dispose();
   }
 
