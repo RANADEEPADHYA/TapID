@@ -27,17 +27,9 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen>
     with TickerProviderStateMixin {
-
-
-  /// WELCOME CONTROLLER
   late final WelcomeController _controller;
-
-
-  /// ENTRANCE ANIMATION CONTROLLER
   late final AnimationController _entranceController;
 
-
-  /// STARTUP STEPS
   final List<StartupStep> _steps = const [
     StartupStep(
       title: 'Initializing',
@@ -65,35 +57,30 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   void initState() {
     super.initState();
 
-
-    /// WELCOME CONTROLLER
     _controller = WelcomeController(
       initializeApp: widget.initializeApp,
       minimumDuration: widget.minimumDuration,
       onFinished: widget.onFinished,
     )..addListener(_onControllerChanged);
 
-
-    /// ENTRANCE ANIMATION
     _entranceController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 4000),
     );
 
-    /// Start animation after screen is built.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         _entranceController.forward();
       }
     });
+
     _controller.start();
   }
 
-
-  /// CONTROLLER UPDATE
   void _onControllerChanged() {
-    if (!mounted) return;
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
@@ -106,19 +93,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     super.dispose();
   }
 
-
-  /// GO TO ONBOARDING
   void _goToOnboarding(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute<void>(
         builder: (_) => const OnboardingScreen(),
       ),
     );
   }
 
-
-  /// BOTTOM → TOP ITEM ANIMATION
   Widget _buildEntranceAnimation({
     required Widget child,
     required double begin,
@@ -137,15 +119,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       animation: animation,
       child: child,
       builder: (context, child) {
-        final double progress = animation.value;
-
-        /// Starts 60 pixels below its final position.
-        final double offsetY = 100 * (1 - progress);
+        final progress = animation.value;
 
         return Opacity(
           opacity: progress,
           child: Transform.translate(
-            offset: Offset(0, offsetY),
+            offset: Offset(0, 40 * (1 - progress)),
             child: child,
           ),
         );
@@ -153,112 +132,133 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     );
   }
 
-
-  /// BUILD
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.black,
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final screenWidth = constraints.maxWidth;
+            final screenHeight = constraints.maxHeight;
 
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final double width = constraints.maxWidth;
-          final double height = constraints.maxHeight;
+            final isWide = screenWidth >= 600;
+            final isCompact = screenHeight < 650;
 
+            final horizontalPadding = isWide ? 28.0 : 16.0;
 
-          /// RESPONSIVE DEVICE TYPE
-          final bool isWide = width >= 700;
+            final contentWidth = math.max(
+              0.0,
+              math.min(
+                screenWidth - horizontalPadding * 2,
+                isWide ? 520.0 : 480.0,
+              ),
+            );
 
+            final logoWidth = math.min(
+              contentWidth * (isCompact ? 0.34 : 0.43),
+              isCompact ? 150.0 : 200.0,
+            );
 
-          /// CONTENT WIDTH
-          final double contentWidth = isWide
-              ? math.min(width * 0.62, 560)
-              : width * 0.92;
+            final firstSpacing = (screenHeight * 0.025)
+                .clamp(10.0, 24.0)
+                .toDouble();
 
-          return SafeArea(
-            child: Center(
+            final secondSpacing = (screenHeight * 0.045)
+                .clamp(16.0, 36.0)
+                .toDouble();
+
+            final thirdSpacing = (screenHeight * 0.035)
+                .clamp(12.0, 28.0)
+                .toDouble();
+
+            final lastSpacing = (screenHeight * 0.025)
+                .clamp(10.0, 20.0)
+                .toDouble();
+
+            return Center(
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxWidth: contentWidth,
+                  maxWidth: isWide ? 576 : double.infinity,
                 ),
-                child: Padding(
+                child: SingleChildScrollView(
+                  keyboardDismissBehavior:
+                  ScrollViewKeyboardDismissBehavior.onDrag,
                   padding: EdgeInsets.symmetric(
-                    horizontal: isWide ? 24 : 18,
+                    horizontal: horizontalPadding,
+                    vertical: isCompact ? 12 : 20,
                   ),
-
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-
-
-                      /// WELCOME TEXT
-                      _buildEntranceAnimation(
-                        begin: 0.00,
-                        end: 0.30,
-                        child: WelcomeText(
-                          width: contentWidth,
-                          height: height,
-                        ),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: math.max(
+                        0.0,
+                        screenHeight -
+                            (isCompact ? 24.0 : 40.0),
                       ),
-
-
-                      /// SPACING
-                      SizedBox(height: (height * 0.03).clamp(20.0, 40.0).toDouble(),),
-
-
-                      /// STARTUP STATUS
-                      _buildEntranceAnimation(
-                        begin: 0.15,
-                        end: 0.45,
-                        child: IntroStartupStatusRow(
-                          steps: _steps,
-                          currentStep: _controller.currentStep,
-                          width: contentWidth,
-                          height: height,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        _buildEntranceAnimation(
+                          begin: 0.00,
+                          end: 0.30,
+                          child: WelcomeText(
+                            width: contentWidth,
+                            height: screenHeight,
+                            logoSize: logoWidth,
+                            compact: isCompact,
+                          ),
                         ),
-                      ),
 
+                        SizedBox(height: firstSpacing),
 
-                      /// SPACING
-                      SizedBox(height: (height * 0.06).toDouble(),),
-
-
-                      /// PROGRESS
-                      _buildEntranceAnimation(
-                        begin: 0.35,
-                        end: 0.65,
-                        child: ProgressSection(
-                          progress: _controller.progress,
-                          width: contentWidth,
+                        _buildEntranceAnimation(
+                          begin: 0.15,
+                          end: 0.45,
+                          child: IntroStartupStatusRow(
+                            steps: _steps,
+                            currentStep: _controller.currentStep,
+                            width: contentWidth,
+                            height: screenHeight,
+                          ),
                         ),
-                      ),
 
+                        SizedBox(height: secondSpacing),
 
-                      /// SPACING
-                      SizedBox(height: (height * 0.01).clamp(12.0, 24.0).toDouble(),),
-
-
-                      /// LOADING BUTTON
-                      _buildEntranceAnimation(
-                        begin: 0.55,
-                        end: 0.90,
-                        child: LoadingStatusButton(
-                          duration: const Duration(seconds: 4),
-                          loadingText: 'Loading...',
-                          finishedText: 'Next',
-                          onFinished: () {
-                            _goToOnboarding(context);
-                          },
+                        _buildEntranceAnimation(
+                          begin: 0.35,
+                          end: 0.65,
+                          child: ProgressSection(
+                            progress: _controller.progress,
+                            width: contentWidth,
+                          ),
                         ),
-                      ),
-                    ],
+
+                        SizedBox(height: thirdSpacing),
+
+                        _buildEntranceAnimation(
+                          begin: 0.55,
+                          end: 0.90,
+                          child: LoadingStatusButton(
+                            duration: const Duration(seconds: 4),
+                            loadingText: 'Loading...',
+                            finishedText: 'Next',
+                            onFinished: () {
+                              _goToOnboarding(context);
+                            },
+                          ),
+                        ),
+
+                        SizedBox(height: lastSpacing),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

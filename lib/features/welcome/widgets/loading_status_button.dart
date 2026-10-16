@@ -31,7 +31,6 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
   bool _isLoading = true;
 
   @override
-  @override
   void initState() {
     super.initState();
 
@@ -60,29 +59,32 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final buttonWidth = constraints.maxWidth;
 
-    /// Same width for both loading and finished states
-    final double buttonWidth =
-        MediaQuery.sizeOf(context).width * 0.80;
-
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 500),
-      transitionBuilder: (child, animation) {
-        return FadeTransition(
-          opacity: animation,
-          child: ScaleTransition(
-            scale: animation,
-            child: child,
-          ),
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 400),
+          transitionBuilder: (child, animation) {
+            return FadeTransition(
+              opacity: animation,
+              child: ScaleTransition(
+                scale: animation,
+                child: child,
+              ),
+            );
+          },
+          child: _isLoading
+              ? _buildLoadingButton(buttonWidth)
+              : _buildFinishedButton(buttonWidth),
         );
       },
-      child: _isLoading
-          ? _buildLoadingButton(buttonWidth)
-          : _buildFinishedButton(buttonWidth),
     );
   }
+
 
   /// LOADING BUTTON
   Widget _buildLoadingButton(double width) {
@@ -131,15 +133,20 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
 
 
           /// Loading (Text)
-          Text(
-            widget.loadingText,
-            style: GoogleFonts.lobsterTwo(
-              color: AppColors.white,
-              fontSize: 28,
-              fontWeight: FontWeight.w800,
-              fontStyle: FontStyle.italic,
+          Flexible(
+            child: Text(
+              widget.loadingText,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.lobsterTwo(
+                color: AppColors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.w800,
+                fontStyle: FontStyle.italic,
+              ),
             ),
           ),
+
         ],
       ),
     );
@@ -190,12 +197,17 @@ class _LoadingStatusButtonState extends State<LoadingStatusButton>
                   children: [
 
                     /// Text
-                    Text(
-                      widget.finishedText,
-                      style: GoogleFonts.roboto(
-                        color: AppColors.white,
-                        fontSize: 32,
-                        fontWeight: FontWeight.w800,
+                    Flexible(
+                      child: Text(
+                        widget.finishedText,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.lobsterTwo(
+                          color: AppColors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w800,
+                          fontStyle: FontStyle.italic,
+                        ),
                       ),
                     ),
                   ],

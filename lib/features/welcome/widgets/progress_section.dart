@@ -13,15 +13,15 @@ class ProgressSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
+    final barWidth = (width * 0.65)
+        .clamp(0.0, width)
+        .toDouble();
+
+    return Center(
+      child: SizedBox(
+        width: barWidth,
+        child: Container(
           height: 10,
-          width: width * 0.50,
-          constraints: const BoxConstraints(
-            minWidth: 220,
-            maxWidth: 450,
-          ),
           padding: const EdgeInsets.all(2),
           decoration: BoxDecoration(
             color: AppColors.darkBlue950,
@@ -48,7 +48,7 @@ class ProgressSection extends StatelessWidget {
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 }

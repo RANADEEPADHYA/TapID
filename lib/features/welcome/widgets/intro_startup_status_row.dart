@@ -4,7 +4,7 @@ import '../../../theme/app_colors.dart';
 import '../controllers/startup_step.dart';
 
 class IntroStartupStatusRow extends StatelessWidget {
-  const IntroStartupStatusRow ({
+  const IntroStartupStatusRow({
     super.key,
     required this.steps,
     required this.currentStep,
@@ -17,39 +17,42 @@ class IntroStartupStatusRow extends StatelessWidget {
   final double width;
   final double height;
 
+
   @override
   Widget build(BuildContext context) {
-    final bool compact = width < 370;
+    final compact = width < 370 || height < 650;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: List.generate(
-        steps.length,
-            (index) {
-          return Expanded(
-            child: Row(
-              children: [
-                Expanded(
+      children: List.generate(steps.length, (index) {
+        return Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: compact ? 2 : 4,
+                  ),
                   child: _StatusItem(
                     step: steps[index],
                     active: index <= currentStep,
                     compact: compact,
-                    height: height,
                   ),
                 ),
+              ),
 
-                /// Divider between status items
-                if (index < steps.length - 1)
-                  Container(
-                    width: 1,
-                    height: compact ? 58 : 72,
-                    color: AppColors.iconCircleDarkFull,
-                  ),
-              ],
-            ),
-          );
-        },
-      ),
+              // Vertical divider between status items.
+              if (index < steps.length - 1)
+                Container(
+                  width: 1,
+                  height: compact ? 58 : 72,
+                  margin: const EdgeInsets.only(top: 4),
+                  color: AppColors.iconCircleDarkBorder,
+                ),
+            ],
+          ),
+        );
+      }),
     );
   }
 }
@@ -59,28 +62,30 @@ class _StatusItem extends StatelessWidget {
     required this.step,
     required this.active,
     required this.compact,
-    required this.height,
   });
 
   final StartupStep step;
   final bool active;
   final bool compact;
-  final double height;
 
   @override
   Widget build(BuildContext context) {
+    final iconSize = compact ? 36.0 : 44.0;
+    final labelSize = compact ? 10.0 : 12.0;
+
+    final textColor = active
+        ? AppColors.white
+        : AppColors.textSecondary;
+
     return AnimatedOpacity(
       duration: const Duration(milliseconds: 400),
-      opacity: active ? 1.0 : 0.45,
+      opacity: active ? 1 : 0.45,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-
-
-          /// Status Icon Circle
           Container(
-            width: compact ? 38 : 44,
-            height: compact ? 38 : 44,
+            width: iconSize,
+            height: iconSize,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: active
@@ -93,76 +98,42 @@ class _StatusItem extends StatelessWidget {
                 width: 1.5,
               ),
             ),
-            child: Center(
-              child: active
-                  ? ShaderMask(
-                shaderCallback: (bounds) {
-                  return const LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      AppColors.brandPink,
-                      AppColors.primaryPurple,
-                      AppColors.primaryBlue,
-                    ],
-                  ).createShader(
-                    Rect.fromLTWH(
-                      0,
-                      0,
-                      bounds.width,
-                      bounds.height,
-                    ),
-                  );
-                },
-                blendMode: BlendMode.srcIn,
-                child: Icon(
-                  step.icon,
-                  size: compact ? 21 : 25,
-                  color: AppColors.white,
-                ),
-              )
-                  : Icon(
-                step.icon,
-                size: compact ? 21 : 25,
-                color: AppColors.textSecondary,
-              ),
+            child: Icon(
+              step.icon,
+              size: compact ? 19 : 23,
+              color: active
+                  ? AppColors.primaryPurple
+                  : AppColors.textSecondary,
             ),
           ),
 
+          SizedBox(height: compact ? 7 : 12),
 
-          /// Responsive spacing
-          SizedBox(
-            height: (height * 0.01).clamp(10.0, 20.0).toDouble(),
-          ),
-
-
-          /// Title
           Text(
             step.title,
             textAlign: TextAlign.center,
-            maxLines: 1,
+            maxLines: 2,
+            softWrap: true,
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.roboto(
-              color: active
-                  ? AppColors.white
-                  : AppColors.textSecondary,
-              fontSize: 14 ,
-              fontWeight: FontWeight.w500,
+              color: textColor,
+              fontSize: labelSize,
+              fontWeight: FontWeight.w600,
             ),
           ),
 
-          /// Subtitle
+          const SizedBox(height: 3),
+
           Text(
             step.subtitle,
             textAlign: TextAlign.center,
-            maxLines: 1,
+            maxLines: 2,
+            softWrap: true,
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.roboto(
-              color: active
-                  ? AppColors.white
-                  : AppColors.textSecondary,
-              fontSize: 14 ,
-              fontWeight: FontWeight.w500,
+              color: textColor,
+              fontSize: labelSize,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ],
